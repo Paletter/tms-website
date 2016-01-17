@@ -1,0 +1,124 @@
+<div class="row">
+    <div class="col-md-12" >
+    <div class="panel panel-deepblue">
+        <div class="panel-heading">
+            <h4>包裹核重</h4>
+        </div>
+        <div class="panel-body">
+            <div class="row row-form col-md-10">
+                <div class="col-md-10 row-control">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon span-control">运单号/包裹号：</span>
+                        <input placeholder="CONSIGNMENT NO/PIECES NO" id="queryNo" type="text" class="form-control text-control"
+                               ng-model="queryParam.queryNo"
+                               ng-keypress="queryKeypressEvent($event)"
+                         	   ng-change="queryParam.queryNo = queryParam.queryNo.toUpperCase()" />
+                    </div>
+                </div>
+                <div class="col-md-10 row-control">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon span-control"><span class="spt4"></span>包裹号：</span>
+                        <input placeholder="WEIGHT" readonly="readonly" ng-model="consignment.piecesNo" type="text" class="form-control text-control">
+                    </div>
+                </div>
+                <div class="col-md-10 row-control">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon span-control"><span class="spt4"></span>实重重量：</span>
+                        <input placeholder="WEIGHT" readonly="readonly" ng-model="consignment.actualWeight" type="text" class="form-control text-control">
+                    </div>
+                </div>
+                <div class="col-md-3 row-control">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon span-control"><span class="spt2"></span><span class="spt4"></span>体积重：</span>
+                        <input placeholder="VOLUMN WEIGHT" ng-model="consignment.volumeWeight" type="text" class="form-control text-control" readonly="readonly">
+                        <span class="input-group-addon span-control"></span>
+                    </div>
+                </div>
+                <div class="col-md-1 row-control">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon span-control">长：</span>
+                        <input placeholder="LENGTH" ng-model="consignment.length" type="text" class="form-control text-control" readonly="readonly">
+                        <span class="input-group-addon span-control"></span>
+                    </div>
+                </div>
+                <div class="col-md-1 row-control">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon span-control">宽：</span>
+                        <input placeholder="WIDTH" ng-model="consignment.width" type="text" class="form-control text-control" readonly="readonly">
+                        <span class="input-group-addon span-control"></span>
+                    </div>
+                </div>
+                <div class="col-md-1 row-control">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon span-control">高：</span>
+                        <input placeholder="HEIGHT" ng-model="consignment.height" type="text" class="form-control text-control" readonly="readonly">
+                        <span class="input-group-addon span-control"></span>
+                    </div>
+                </div>
+                <div class="col-md-10 row-control">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon span-control">毛重核重重量：</span>
+                        <input placeholder="KERNEL WEIGHT" type="text" class="form-control text-control" id="kernelWeight"
+                               ng-model="kernelWeight"
+                               ng-keypress="keyPressSaveKernelEventForKernelWeight($event);">
+                    </div>
+                </div>
+                <div class="col-md-11 row-control">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon span-control">体积核重重量：</span>
+                        <input placeholder="KERNEL VOLUMN WEIGHT" type="text" class="form-control text-control" readonly="readonly" style="width: 70%;"
+                               ng-model="kernelVolumeWeight.weight" />
+                        <button type="button" ng-click="showKernelVolumeWeightModal()" class="btn btn-primary btn-sm">Calculate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="consignment.tmPiecesId" class="panel-footer btn-control btn-control-center">
+            <button type="button" class="btn btn-sm btn-primary" ng-click="saveKernelWeight()"><span class="glyphicon glyphicon-floppy-disk">(Save)保存核重</span></button>
+        </div>
+    </div>
+    </div>
+</div>
+
+<!-- 体积核重重 -->
+<div class="modal" id="kernelVolumeWeightModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" style="width:350px">
+        <div class="modal-content" style="height:280px;">
+            <div class="modal-header">
+                <h4 class="modal-title">体积重</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+				    <div class="col-md-12">
+				        <div class="panel">
+			                <div class="panel-body">
+			                	<div class="row row-form col-md-13">
+			                    	<div class="input-group input-group-sm margin-tb-5">
+				                    	<span class="input-group-addon span-control">(Length)长({{UnitsConfig.volumeUnit}})：</span>
+			                    		<input ng-model="kernelVolumeWeight.length" placeholder="LENGTH" maxlength="5" type="text" class="form-control">
+			                    	</div>
+			                    	<div class="input-group input-group-sm margin-tb-5">
+				                    	<span class="input-group-addon span-control">&nbsp;&nbsp;(Width)宽({{UnitsConfig.volumeUnit}})：</span>
+			                    		<input ng-model="kernelVolumeWeight.width" placeholder="WIDTH" maxlength="5" type="text" class="form-control">
+			                    	</div>
+			                    	<div class="input-group input-group-sm margin-tb-5">
+				                    	<span class="input-group-addon span-control">&nbsp;(Height)高({{UnitsConfig.volumeUnit}})：</span>
+			                    		<input ng-model="kernelVolumeWeight.height" placeholder="HEIGHT" maxlength="5" type="text" class="form-control">
+			                    	</div>
+			                    </div>
+			                </div>
+				        </div>
+				    </div>
+				</div>
+            </div>
+            <div class="panel-footer btn-control btn-control-center">
+            	<button type="button" class="btn btn-primary btn-sm" ng-click="calculateVolumeWeight()">
+                	<span class="glyphicon glyphicon-ok">计算体积重</span>
+                </button>
+            	<button type="button" class="btn btn-primary btn-sm" ng-click="cancelKernelVolumeWeightModal()">
+                	<span class="glyphicon glyphicon-remove">取消</span>
+                </button>
+		     </div>
+        </div>
+    </div>
+</div>

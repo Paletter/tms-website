@@ -1,0 +1,123 @@
+<html>
+
+<div class="example">
+				<div style="padding-top:120px" class="example__left">
+					<div class="webcam" id="webcam">
+						<div class="js-preview webcam__preview"></div>
+						<div class="btn btn-success">
+							<div class="js-webcam">
+								<span class="btn-txt">Webcam</span>
+							</div>
+							<div style="display: none;" class="js-upload">
+								<div class="progress progress-success"><div class="js-progress bar"></div></div>
+								<span class="btn-txt">Uploading</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="example__right">
+					<h2><span>Webcam</span><div class="example__tabs"><a data-tab="javascript" class="active">code</a> <a data-tab="html">html</a></div></h2>
+				<div><div data-code="javascript" class="example__code language-javascript"><pre><code>$(<span class="string">'#webcam'</span>).fileapi({
+   url: <span class="string">'http://rubaxa.org/FileAPI/server/ctrl.php'</span>,
+   accept: <span class="string">'image/*'</span>,
+   autoUpload: <span class="literal">true</span>,
+   elements: {
+      active: { show: <span class="string">'.js-upload'</span>, hide: <span class="string">'.js-webcam'</span> },
+      preview: {
+         el: <span class="string">'.js-preview'</span>,
+         width: <span class="number">200</span>,
+         height: <span class="number">200</span>
+      },
+      progress: <span class="string">'.js-progress'</span>
+   }
+});
+$(<span class="string">'.js-webcam'</span>, <span class="string">'#webcam'</span>).click(<span class="function"><span class="keyword">function</span> <span class="params">(evt)</span>{</span>
+   <span class="keyword">var</span> modal = $(<span class="string">'#popup'</span>).modal({
+      closeOnOverlayClick: <span class="literal">false</span>,
+      onOpen: <span class="function"><span class="keyword">function</span> <span class="params">(overlay)</span>{</span>
+         $(<span class="string">'.js-img'</span>, overlay).webcam({
+            width: <span class="number">320</span>,
+            height: <span class="number">240</span>,
+            error: <span class="function"><span class="keyword">function</span> <span class="params">(err)</span>{</span>
+               <span class="comment">// err &mdash; https://developer.mozilla.org/en-US/docs/Web/API/Navigator.getUserMedia</span>
+               $.modal().close();
+               alert(<span class="string">"Unfortunately, your browser does not support webcam."</span>);
+            },
+            success: <span class="function"><span class="keyword">function</span> <span class="params">(webcam)</span>{</span>
+               $(overlay).on(<span class="string">'click'</span>, <span class="string">'.js-upload'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span>{</span>
+                  $(<span class="string">'#webcam'</span>).fileapi(<span class="string">'add'</span>, webcam.shot());
+                  modal.close();
+               });
+            }
+         });
+      },
+      onClose: <span class="function"><span class="keyword">function</span> <span class="params">(overlay)</span>{</span>
+         $(<span class="string">'.js-img'</span>, overlay).webcam(<span class="string">'destroy'</span>);
+      }
+   });
+   modal.open();
+   evt.preventDefault();
+});</code></pre></div><div style="display: none" data-code="html" class="example__code language-html xml"><pre><code><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"webcam"</span> <span class="attribute">class</span>=<span class="value">"webcam"</span>&gt;</span>
+   <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"js-preview webcam__preview"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+   <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"btn btn-success"</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"js-webcam"</span>&gt;</span>
+         <span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"btn-txt"</span>&gt;</span>Webcam<span class="tag">&lt;/<span class="title">span</span>&gt;</span>
+      <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"js-upload"</span> <span class="attribute">style</span>=<span class="value">"display: none;"</span>&gt;</span>
+         <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"progress progress-success"</span>&gt;</span><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"js-progress bar"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+         <span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"btn-txt"</span>&gt;</span>Uploading<span class="tag">&lt;/<span class="title">span</span>&gt;</span>
+      <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+   <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre></div></div></div>
+
+				<script>
+					examples.push(function (){
+						$('#webcam').fileapi({
+							url: 'http://rubaxa.org/FileAPI/server/ctrl.php',
+							accept: 'image/*',
+							autoUpload: true,
+							elements: {
+								active: { show: '.js-upload', hide: '.js-webcam' },
+								preview: {
+									el: '.js-preview',
+									width: 200,
+									height: 200
+								},
+								progress: '.js-progress'
+							}
+						});
+
+						$('.js-webcam', '#webcam').click(function (evt){
+							var modal = $('#popup').modal({
+								closeOnOverlayClick: false,
+								onOpen: function (overlay){
+									$('.js-img', overlay).webcam({
+										width: 320,
+										height: 240,
+										error: function (err){
+											// err &mdash; https://developer.mozilla.org/en-US/docs/Web/API/Navigator.getUserMedia
+											$.modal().close();
+											alert("Unfortunately, your browser does not support webcam.");
+										},
+										success: function (webcam){
+											$(overlay).on('click', '.js-upload', function (){
+												$('#webcam').fileapi('add', webcam.shot());
+												modal.close();
+											});
+										}
+									});
+								},
+								onClose: function (overlay){
+									$('.js-img', overlay).webcam('destroy');
+								}
+							});
+
+							modal.open();
+							evt.preventDefault();
+						});
+					});
+				</script>
+			</div>
+
+</html>

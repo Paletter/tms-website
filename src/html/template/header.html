@@ -1,0 +1,22 @@
+<div id="site_header">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div>
+                <div class="h_con">
+                    <a class="udf_logo pointer" href="/welcome.html"><img src="css/img/udf_logo.png"></a>
+                    <div style="float: right;margin-top: 15px;display: inline;">
+                        欢迎您：{{loginUser.cdUser.fullName}},&nbsp;<span class="bluefont">{{currentWarehouseDesc}}</span>|
+                        <div style="display:inline;" ng-click="changePrintMode('download')" class="pointer">
+                            <input type="radio" value="download" class="pointer" ng-model="printMode" />下载模式
+                        </div>
+                        <div style="display:inline;" ng-click="changePrintMode('print')" class="pointer">
+                            <input type="radio" value="print" class="pointer" ng-model="printMode" />打印模式
+                        </div>
+                        |
+                        <a href="/switch_warehouse.html">[切换仓库]</a><a ng-click="logout()">[退出]</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

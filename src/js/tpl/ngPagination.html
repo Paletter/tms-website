@@ -1,0 +1,23 @@
+﻿<DIV>
+	<div class="col-sm-2 text-left">
+	    <div class="pagination pager" style="font-size:14px; font-weight: bolder;">总记录：{{total}} 条</div>
+	</div>
+	<div class="col-sm-10 text-right">
+        <ul class=" pagination pager">
+            <li ng-click="skipPage(curPage-1)" ng-class="{disabled:curPage==1}"><a style="border-radius: 5px 0px 0px 5px;">上一页</a></li>
+		    <li ng-repeat="page in pageList" ng-click="skipPage(page.num)" ng-class="{active:curPage==page.num}">
+		  	    <a style="border-radius: 0px;" ng-show="!page.isOmit">{{page.num}}</a>
+		        <a style="border-radius: 0px;" ng-show="page.isOmit">{{page.text}}</a>
+		    </li>
+		    <li ng-click="skipPage(curPage+1)" ng-class="{disabled:curPage==pages}" ><a style="border-radius: 0px 5px 5px 0px;">下一页</a></li>
+		    <li>
+                <span class="search" style="border-radius: 5px 0px 0px 5px; padding:4px;">
+                <input ng-model="inPageNo" placeholder="页码" type="text" id="pageinput" style="border:0px; width:55px;border-radius:2px; text-align: center;">
+                </span>
+            </li>
+            <li ng-class="{disabled:(pages<inPageNo || inPageNo<1)}"><a style="border-radius: 0px 5px 5px 0px;"><span ng-click="skipPage(inPageNo)">跳转</span></a></li>
+		</ul>
+	</div>
+</DIV>
+
+ 

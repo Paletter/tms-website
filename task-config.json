@@ -1,0 +1,32 @@
+{
+    "requirejs": {
+        "requirejs": {
+            "options": {
+                "appDir":"src/",
+                "baseUrl": "js/",
+                "optimizeCss": "standard",
+                "mainConfigFile": "src/js/config.js",
+                "dir": "dist-oso",
+                "removeCombined": "true",
+                "modules": [
+                    {
+                        "name": "app",
+                        "include": ["base/base_module",
+                            "main/oso_main"]
+                    }
+                ]
+            }
+        }
+    },
+    "clean": {
+        "build": {
+            "src": [ "dist-oso", "dist-oso.zip"]
+        }
+    },
+    "zip": {
+        "long-format": {
+            "src": ["dist-oso/**"],
+            "dest": "dist-oso.zip"
+        }
+    }
+}

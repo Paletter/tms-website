@@ -1,0 +1,54 @@
+<div style="margin-top: 50px;width: 400px;" class="panel panel-deepblue center-block">
+    <div class="panel-heading">
+        <h3 class="panel-title">递优仓库管理系统</h3>
+    </div>
+    <div style="padding-top: 30px" class="panel-body">
+        <div style="text-align: left;" class="redfont">{{errorMessage}}</div>
+
+        <form>
+        <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input type="text" class="form-control" id="userName" placeholder="用户名"
+                   ng-model="userName"
+                   ng-readonly="loginStatus == 'success'"
+                   ng-keydown="keyPressGetCountryAuthEvent($event);" />
+        </div>
+        <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input type="password" class="form-control" id="password" placeholder="密码"
+                   ng-model="password"
+                   ng-readonly="loginStatus == 'success'"
+                   ng-keydown="keyPressGetCountryAuthEvent($event);" />
+        </div>
+        </form>
+
+        <div ng-show="loginStatus == 'success'">
+            <div style="margin: auto auto 10px auto;"><span class="bluefont">请选择仓库</span></div>
+            <div style="margin-bottom: 25px" class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+                <select class="form-control"
+                        ng-model="countryCode"
+                        ng-change="getWarehouseByCountryChange()">
+                    <option value="">-- COUNTRY --</option>
+                    <option ng-repeat="row in userCountryAuthList.cdCountryList" value="{{row.countryCode}}">{{row.countryName}}&nbsp;{{row.countryEnglishName}}</option>
+                </select>
+            </div>
+            <div style="margin-bottom: 25px" class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                <select class="form-control"
+                        ng-model="warehouseCode"
+                        ng-keydown="keyPressLoginEvent($event);"
+                        ng-options="row.warehouseCode as row.warehouseDesc for row in warehouseList">
+                    <option value="">-- WAREHOUSE --</option>
+                </select>
+            </div>
+        </div>
+        <div style="margin-top: 10px" class="form-group">
+            <div class="col-sm-12 controls">
+                <button type="button" class="btn btn-primary" ng-click="getLoginUserCountryAuth()" ng-show="loginStatus == 'initial'">登录</button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary" ng-click="login()" ng-show="loginStatus == 'success'">登录</button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary" ng-click="reset()">重置</button>
+            </div>
+        </div>
+    </div>
+</div>

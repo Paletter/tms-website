@@ -1,0 +1,59 @@
+<!--#include file="../../class/class_soupload.asp"-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>¼¼˵Ԥ@</title>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="ajaxupload.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		new AjaxUpload('#ss', {
+			action : 'so.upload.asp',
+			name : 'file1',
+			data : {
+				formpath : './a',
+				formautonamed : '1'
+			},
+			//选择后自动开始上传
+			autoSubmit : true,
+			//返回Text格式数据
+			responseType : false,
+			//上传的时候按钮不可用
+			onSubmit : function(filename, ext) {
+				//设置允许上传的文件格式
+				if (!(ext && /^(jpg|png|jpeg|gif)$/.test(ext))) {
+					alert('未允许上传的文件格式!');
+					// cancel upload
+					return false;
+				}
+			},
+			//上传完成后取得文件名filename为本地取得的文件名，msg为服务器返回的信息
+			onComplete : function(filename, msg) {
+				$('#UL').val(msg);
+			}
+		});
+	});
+</script>
+<style type="text/css">
+body {
+	margin: 0px;
+	font-size: 12px;
+}
+
+#upload_button1 {
+	width: 100px;
+	height: 50px;
+	background-color: #CEE7FF;
+	text-align: center;
+	line-height: 50px;
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+	<div id="upload_button1">上传附档</div>
+	<button type="button" id="ss">shangc</button>
+	<input type="text" id="UL" />
+</body>
+</html>
