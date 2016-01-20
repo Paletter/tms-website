@@ -1,0 +1,45 @@
+inventory<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-deepblue">
+            <div class="panel-heading">
+                <h4>包裹上架</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row row-form col-md-10">
+                    <div class="col-md-4 row-control">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon span-control">库位号：</span>
+                            <input ng-model="putUp.locCode" ng-keydown="locCodeKeyPressEvent($event);" ng-change="putUp.locCode = putUp.locCode.toUpperCase();wmLocation = {};"
+                            	id="locCode" placeholder="LOC CODE" type="text" class="form-control text-control">
+                        </div>
+                    </div>
+                    <div class="col-md-5 row-control">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon span-control">上架包裹号/运单号：</span>
+                            <input ng-model="putUp.putUpNo" ng-keydown="putNoKeyPressEvent($event);" ng-change="putUp.putUpNo = putUp.putUpNo.toUpperCase();"
+                            	ng-readonly="!wmLocation.wmLocationId" id="putUpNo" placeholder="PIECES NO/CONSIGNMENT NO" type="text" class="form-control text-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer btn-control">
+	            	<div class="row row-form">
+	            		<div class="col-md-12">
+					        <div>
+								<table ng-show="wmLocationCurrentList.length > 0" style="width:100%;">
+									<tr align="center">
+										<td style="float:left;width:30%;">包裹号</td>
+										<td style="float:left;width:30%;">运单号</td>
+									</tr>
+									<tr ng-repeat="item in wmLocationCurrentList">
+										<td style="float:left;width:30%;text-align:center;">{{item.piecesNo}}&nbsp;</td>
+										<td style="float:left;width:30%;text-align:center;">{{item.consignmentNo}}&nbsp;</td>
+									</tr>
+						        </table>
+						   </div>  
+				        </div>
+	                </div>
+            </div>
+        </div>
+    </div>
+</div>

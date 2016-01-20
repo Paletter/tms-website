@@ -1,8 +1,3 @@
-/**
- * Created by Jeng on 2014/8/27.
- * 过滤器：日期格式化
- * 可选日期类型：
- */
 define(function () {
     return [function(){
         return function(dateTime, format){

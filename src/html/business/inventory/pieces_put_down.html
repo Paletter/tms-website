@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-deepblue">
+            <div class="panel-heading">
+                <h4>包裹下架</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row row-form col-md-10">
+                    <div class="col-md-5 row-control">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon span-control">下架包裹号/运单号：</span>
+                            <input ng-model="putDown.putDownNo" ng-keydown="putDownNoKeyPressEvent($event);" ng-change="putDown.putDownNo = putDown.putDownNo.toUpperCase();"
+                            	id="putDownNo" placeholder="PIECES NO/CONSIGNMENT NO" type="text" class="form-control text-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
