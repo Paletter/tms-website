@@ -30,7 +30,7 @@ define(function() {
             Dialog.queryLoad();
         	$scope.putUp.locCode = $scope.putUp.locCode.toUpperCase();
             var params = {locCode:$scope.putUp.locCode};
-        	BaseHttp.get('/PiecesPutUpController/queryLocationInfo',{params:params}).success(function(data) {
+        	BaseHttp.get("/PiecesPutUpController/queryLocationInfo",{params:params}).success(function(data) {
         		if(data.result) {
         			$scope.wmLocation = data.result.wmLocation;
         			$scope.wmLocationCurrentList = data.result.wmLocationCurrentList;
@@ -81,7 +81,7 @@ define(function() {
                         
                     	$scope.putUp.locCode = $scope.putUp.locCode.toUpperCase();
                         var params = {locCode:$scope.putUp.locCode};
-                        BaseHttp.get('/PiecesPutUpController/queryWmLocation',{params:params}).success(function(data) {
+                        BaseHttp.get('/PiecesPutUpController/queryLocationInfo',{params:params}).success(function(data) {
                         	if(data.result) {
                     			$scope.wmLocation = data.result.wmLocation;
                     			$scope.wmLocationCurrentList = data.result.wmLocationCurrentList;
