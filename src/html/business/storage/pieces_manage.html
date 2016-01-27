@@ -284,7 +284,7 @@
                         </tr>
                     </table>
                 </div>
-                <div ng-show="piecesDetail.tmConsignmentItemList.length > 0">
+                <div ng-show="consignmentItemList.length > 0">
                     <div style="margin: 10px auto 10px auto;">货品明细</div>
                     <table table border="solid black 1px" style="text-align: center;width: 100%;">
                         <tr>
@@ -295,7 +295,7 @@
                             <td style="text-align: center;">价格</td>
                             <td style="text-align: center;">数量</td>
                         </tr>
-                        <tr ng-repeat="csmItem in piecesDetail.tmConsignmentItemList">
+                        <tr ng-repeat="csmItem in consignmentItemList">
                             <td style="text-align: left;padding-left: 5px;">{{csmItem.goodsCode}}</td>
                             <td style="text-align: left;padding-left: 5px;">{{csmItem.brandName}}</td>
                             <td style="text-align: left;padding-left: 5px;">{{csmItem.goodsDescription}}</td>
@@ -305,7 +305,7 @@
                         </tr>
                     </table>
                 </div>
-                <div ng-show="piecesDetail.piecesHistoryVoList.length > 0">
+                <div ng-show="piecesHistoryList.length > 0">
                     <div style="margin: 10px auto 10px auto;">操作记录</div>
                     <table table border="solid black 1px" style="text-align: center;width: 100%;">
                         <tr>
@@ -314,7 +314,7 @@
                             <td style="text-align: center;">操作员</td>
                             <td style="text-align: center;">描述</td>
                         </tr>
-                        <tr ng-repeat="piecesHistory in piecesDetail.piecesHistoryVoList">
+                        <tr ng-repeat="piecesHistory in piecesHistoryList">
                             <td style="text-align: left;width: 150px;word-wrap: break-word;padding-left: 5px;">{{piecesHistory.actionDateTime | formatDate:"dateTime"}}</td>
                             <td style="text-align: left;width: 100px;word-wrap: break-word;padding-left: 5px;">{{piecesHistory.actionDesc}}</td>
                             <td style="text-align: left;width: 100px;word-wrap: break-word;padding-left: 5px;">{{piecesHistory.actionUserName}}</td>

@@ -33,7 +33,9 @@ define(function() {
             var params = {piecesNo: $scope.piecesList[index].piecesNo};
             BaseHttp.get('/PiecesManageController/queryPiecesDetailInfos', {params:params}).success(function(data){
                 if(data.result){
-                    $scope.piecesDetail = data.result;
+                    $scope.piecesDetail = data.result.piecesDetailResultVo;
+                    $scope.consignmentItemList = data.result.tmConsignmentItemList;
+                    $scope.piecesHistoryList = data.result.piecesHistoryVoList;
                     $scope.showPiecesDetailModal();
                 }
             });

@@ -9,7 +9,7 @@ define(function() {
         $scope.piecesPickDown = function() {
             Dialog.updateLoad();
         	var params = {putDownNo:$scope.putDown.putDownNo};
-    		BaseHttp.post('/PiecesPutDownController/piecesPutDown',params).success(function(data) {
+    		BaseHttp.post("/PiecesPutDownController/piecesPutDown",params).success(function(data) {
     			if(data.result) {
                     Dialog.remind("操作成功", {time:0.5, ok:function(){}});
                     SystemUtils.playSuccessSound();
