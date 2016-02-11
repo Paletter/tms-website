@@ -4,62 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=8">
-    <meta name="Keywords" content="优递网,优递"></meta>
-    <meta name="Description" content="优递网"></meta>
-    <title>递优仓库管理系统</title>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <title>调色盘转运仓系统</title>
+
     <!-- Start: less #  -->
     <meta name="fragment" content="!" />
     <base href="/">
     <!-- End less -->
-    <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/base/udf.css">
-    <!-- 控件样式  -->
-    <link href="js/lib/art-dialog/css/ui-dialog.css" type="text/css" rel="stylesheet"/>
-    <link rel="stylesheet" href="js/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
-    <!-- /控件样式  -->
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="js/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="js/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" type="text/css" href="js/lib/metisMenu/dist/metisMenu.min.css" />
+    <link rel="stylesheet" type="text/css" href="js/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="js/lib/art-dialog/css/ui-dialog.css" />
+    <link rel="stylesheet" type="text/css" href="css/ui/sb-admin-2.css" />
+    <link rel="stylesheet" type="text/css" href="css/ui/my.css" />
+
+    <!-- JS -->
     <script type="text/javascript" src="js/lib/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="js/lib/angular/angular.min.js"></script>
     <script type="text/javascript" src="js/lib/angular/angular-route.min.js"></script>
     <script type="text/javascript" src="js/lib/angular/angular-cookies.min.js"></script>
     <script type="text/javascript" src="js/lib/modal/modal.js"></script>
+    <script type="text/javascript" src="js/lib/bootstrap-dropdown/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.fileapi-master/statics/jquery.modal.js"></script>
+    <script type="text/javascript" src="js/lib/photobooth/photobooth_min.js"></script>
+    <script type="text/javascript" src="js/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/lib/metisMenu/dist/metisMenu.min.js"></script>
+
     <script data-main="js/app" src="js/require.js"></script>
     <script type="text/javascript" src="js/config.js"></script>
-    <script>
-		var FileAPI = {debug: true, media: true, staticPath: 'js/lib/jquery.fileapi-master/FileAPI/'};
-	</script>
-    <script type="text/javascript" src="js/lib/bootstrap-dropdown/bootstrap-dropdown.js"></script>
-    <link href="js/lib/jquery.fileapi-master/statics/main.css" type="text/css" rel="stylesheet" />
-    <script type="text/javascript" src="js/lib/jquery.fileapi-master/FileAPI/FileAPI.min.js"></script>
-	<script type="text/javascript" src="js/lib/jquery.fileapi-master/jquery.fileapi.js"></script>
-	<script type="text/javascript" src="js/lib/jquery.fileapi-master/statics/jquery.modal.js"></script>
-	<script type="text/javascript" src="js/lib/photobooth/photobooth_min.js"></script>
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-    <!-- 兼容IE8 -->
-    <!--[if lte IE 9]>
-	<script src="css/bootstrap/js/respond.min.js"></script>
-	<script src="css/bootstrap/js/html5shiv.js"></script>
-	<![endif]-->
-	<!--[if lte IE 8]>
-        <script>
-          document.createElement('ng-include');
-          document.createElement('ng-pluralize');
-          document.createElement('ng-view');
-          // Optionally these for CSS
-          document.createElement('ng:include');
-          document.createElement('ng:pluralize');
-          document.createElement('ng:view');
-          document.createElement('base');
-        </script>
-    <![endif]-->
 </head>
 <body ng-controller="IndexController">
-<div id="site_wrapper">
-    <div ng-if="pageConfig.pageLevel != 0" ng-include="'html/template/header.html'"></div>
-    <div ng-if="pageConfig.pageLevel != 0" ng-include="'html/template/navigation.html'"></div>
-    <div ng-if="pageConfig.pageLevel != 0" id="content" class="col-md-10" ng-view></div>
+<div id="wrapper">
 
-    <div ng-if="pageConfig.pageLevel == 0"  class="container" ng-view></div>
+    <nav ng-if="pageConfig.pageLevel != 0" class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div ng-include="'html/template/header.html'"></div>
+        <div ng-include="'html/template/navigation.html'"></div>
+    </nav>
+
+    <div id="page-wrapper" ng-if="pageConfig.pageLevel != 0" id="content" class="col-md-10" ng-view></div>
+
+    <div ng-if="pageConfig.pageLevel == 0" class="container" ng-view></div>
 </div>
+
+    <script type="text/javascript" src="js/lib/ui/sb-admin-2.js"></script>
+
 </body>
 </html>

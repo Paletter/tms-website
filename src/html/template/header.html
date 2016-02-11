@@ -1,22 +1,54 @@
-<div id="site_header">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <div>
-                <div class="h_con">
-                    <a class="udf_logo pointer" href="/welcome.html"><img src="css/img/udf_logo.png"></a>
-                    <div style="float: right;margin-top: 15px;display: inline;">
-                        欢迎您：{{loginUser.cdUser.fullName}},&nbsp;<span class="bluefont">{{currentWarehouseDesc}}</span>|
-                        <div style="display:inline;" ng-click="changePrintMode('download')" class="pointer">
-                            <input type="radio" value="download" class="pointer" ng-model="printMode" />下载模式
-                        </div>
-                        <div style="display:inline;" ng-click="changePrintMode('print')" class="pointer">
-                            <input type="radio" value="print" class="pointer" ng-model="printMode" />打印模式
-                        </div>
-                        |
-                        <a href="/switch_warehouse.html">[切换仓库]</a><a ng-click="logout()">[退出]</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
 </div>
+
+<ul class="nav navbar-top-links navbar-right">
+    <li>
+        <div class="max-width-768">{{loginUser.cdUser.fullName}},<span class="bluefont">{{currentWarehouseDesc}}</span></div>
+    </li>
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-fw" ng-class="{'fa-print':printMode == 'print', 'fa-download':printMode == 'download'}"></i><i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-user">
+            <li>
+                <a href="" ng-click="changePrintMode('download')">
+                    <i class="fa fa-download fa-fw"></i>
+                    <input type="radio" value="download" class="pointer" ng-model="printMode" />下载模式
+                </a>
+            </li>
+            <li>
+                <a href="" ng-click="changePrintMode('print')">
+                    <i class="fa fa-print fa-fw"></i>
+                    <input type="radio" value="print" class="pointer" ng-model="printMode" />打印模式
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-user">
+            <li><a href="/switch_warehouse.html"><i class="fa fa-home fa-fw"></i>切换仓库</a>
+            </li>
+            <li><a href="" ng-click="logout();"><i class="fa fa-sign-out fa-fw"></i>退出</a>
+            </li>
+        </ul>
+    </li>
+
+</ul>
+
+
+
+
+
+
+
+

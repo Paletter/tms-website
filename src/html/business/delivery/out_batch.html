@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">批次出库</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">批次号</span>
+                            <input type="text" class="form-control text-control"ng-model="queryParams.batchNo" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- panel-body end -->
+
+            <!-- panel-footer -->
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="addOutBatch()"><i class="glyphicon glyphicon-plus"/>创建批次</button>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="searchOutBatchList()"><i class="glyphicon glyphicon-search"/>查找</span></button>
+                    </div>
+                </div>
+            </div>
+            <!-- panel-footer end -->
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>批次号</th>
+                            <th>日期</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="row in outBatchList">
+                            <td>{{row.outBatchNo}}</td>
+                            <td>{{row.outDate | date:"dd/MM/yyyy"}}</td>
+                            <td>
+                                <span ng-show="row.status == 'INITIAL'">未出运</span>
+                                <span ng-show="row.status == 'OUT'">已出运</span>
+                            </td>
+                            <td>
+                                <a href="/delivery/out_batch_deliver.html?outBatchNo={{row.outBatchNo}}&&tmOutBatchId={{row.tmOutBatchId}}&&status={{row.status}}"><span>扫描装箱</span></a>
+                                <a ng-show="row.status == 'INITIAL'" href="" ng-click="deliverOutBatch($index)"><span>批次出仓</span></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div><pagination pg-page-info="pgPageInfo"></pagination></div>
+                </div>
+            </div>
+            <!-- panel-body end -->
+        </div>
+    </div>
+</div>

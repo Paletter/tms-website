@@ -1,0 +1,257 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">航班管理</h1>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">主单号</span>
+                            <input type="text" class="form-control text-control" ng-model="queryParams.mawbCode">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">航班号</span>
+                            <input type="text" class="form-control text-control" ng-model="queryParams.sectorLabel">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">ETD</span>
+                            <input type="text" class="form-control text-control date-input" ng-model="queryParams.startEtd" datetimepicker readonly>
+                            <span class="input-group-addon span-control clear-bg clear-bor">-</span>
+                            <input type="text" class="form-control text-control date-input" ng-model="queryParams.endEtd" datetimepicker readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">ETA</span>
+                            <input type="text" class="form-control text-control date-input" ng-model="queryParams.startEta" datetimepicker readonly>
+                            <span class="input-group-addon span-control clear-bg clear-bor">-</span>
+                            <input type="text" class="form-control text-control date-input" ng-model="queryParams.endEta" datetimepicker readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">航班状态</span>
+                            <select class="form-control select-control" ng-model="queryParams.flyStatus">
+                                <option value="">无</option>
+                                <option value="NOT_FLY">未出运</option>
+                                <option value="FLEW">已出运</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- panel-body end -->
+
+            <!-- panel-footer -->
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="addFlight()"><i class="glyphicon glyphicon-plus"/>创建航班</button>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="searchFlightList()"><i class="glyphicon glyphicon-search"/>查找</span></button>
+                    </div>
+                </div>
+            </div>
+            <!-- panel-footer end -->
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>主单号</th>
+                            <th>航班号</th>
+                            <th>始发站</th>
+                            <th>目的站</th>
+                            <th>ETD/ETA</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="row in flightList">
+                            <td>{{row.mawbCode}}</td>
+                            <td>{{row.sectorLabel}}</td>
+                            <td>{{row.origPortDesc}}</td>
+                            <td>{{row.destPortDesc}}</td>
+                            <td>{{row.etd | date:"dd/MM/yyyy"}}--{{row.eta | date:"dd/MM/yyyy"}}</td>
+                            <td>{{row.actionDesc}}</td>
+                            <td>
+                                <!-- 主单状态：已创建 -->
+                                <div ng-show="row.userViewNo == 100">
+                                    <a href="" ng-click="editFlight($index)">编辑</a>
+                                    <a href="" ng-show="row.tmSectorId" ng-click="deleteFlight($index)">删除</a>
+                                    <a href="" ng-show="row.tmSectorId" ng-click="searchFlightUnitInfo($index)">分箱</a>
+                                    <a href="" ng-click="shippingFlight($index)">出仓</a>
+                                </div>
+                                <!-- 主单状态：已出仓 -->
+                                <div ng-show="row.userViewNo == 200">
+                                    <a href="" ng-click="upperFlight($index)">航班起飞</a>
+                                </div>
+                                <!-- 主单状态：已起飞 -->
+                                <div ng-show="row.userViewNo == 300">
+                                    <a href="" ng-click="arriveFlight($index)">航班降落</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div><pagination pg-page-info="pgPageInfo"></pagination></div>
+                </div>
+            </div>
+            <!-- panel-body end -->
+        </div>
+    </div>
+</div>
+
+<!-- Flight Modal -->
+<div class="modal" id="flightModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="cancelFlightModal();"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 ng-if="!currentFlight.tmSectorId" class="modal-title">创建航班</h4>
+                <h4 ng-if="currentFlight.tmSectorId" class="modal-title">编辑航班</h4>
+            </div>
+            <!-- modal-body -->
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon">主单号</span>
+                        <input type="text" class="form-control" maxlength="20"
+                               ng-model="currentFlight.mawbCode"
+                               ng-disabled="currentFlight.tmSectorId" />
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon">航班号</span>
+                        <input type="text" class="form-control" maxlength="30"
+                               ng-model="currentFlight.sectorLabel" />
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon">始发站</span>
+                        <select class="form-control select-control"
+                                ng-model="currentFlight.origPort"
+                                ng-options="p.portCode as p.portName for p in portList">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon">目的站</span>
+                        <select class="form-control select-control "
+                                ng-model="currentFlight.destPort"
+                                ng-options="p.portCode as p.portName for p in portList">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon">ETD</span>
+                        <input type="text" class="form-control date-input" readonly date-config="{format:'yyyy-mm-dd'}" datetimepicker
+                               ng-model="currentFlight.etd" />
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon">ETA</span>
+                        <input type="text" class="form-control date-input" readonly date-config="{format:'yyyy-mm-dd'}" datetimepicker
+                               ng-model="currentFlight.eta" />
+                    </div>
+                </div>
+            </div>
+            <!-- modal-body end -->
+
+            <!-- modal-footer -->
+            <div class="modal-footer">
+                <button type="button" ng-if="!currentFlight.tmSectorId" class="btn btn-primary" ng-click="saveNewFlight()"><i class="glyphicon glyphicon-floppy-save"/>保存</button>
+                <button type="button" ng-if="currentFlight.tmSectorId" class="btn btn-primary" ng-click="updateFlight()"><i class="glyphicon glyphicon-floppy-save"/>保存</button>
+                <button type="button" class="btn btn-default" ng-click="cancelFlightModal();"><i class="glyphicon glyphicon-remove" />取消</button>
+		    </div>
+            <!-- modal-footer end -->
+        </div>
+    </div>
+</div>
+
+<!-- Unit Modal -->
+<div class="modal" id="unitModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">主单-分箱</h4>
+            </div>
+            <!-- modal-body -->
+            <div class="modal-body auto-overflow">
+                <div ng-repeat="row in unitList" ng-if="$index%2 == 0">
+                    <div class="col-sm-6">
+                        <input type="checkbox" id="{{unitList[$index].tmUnitId}}" ng-model="unitList[$index].checked" ng-true-value="1" ng-false-value="0" class="pointer" />
+                        <a href="" ng-click="redirectToPackGoods($index)" title="货物装包">{{unitList[$index].unitLabel}}</a>
+                        <a href="" ng-if="currentFlight.actionCode=='CR'" ng-click="deleteUnit($index)" class="red-font">删除</a>
+                        <a href="" ng-if="currentFlight.actionCode=='CR'" ng-click="redirectToPackGoods($index)">装包</a>
+                    </div>
+
+                    <div class="col-sm-6" ng-show="unitList[$index+1]">
+                        <input type="checkbox" id="{{unitList[$index+1].tmUnitId}}" ng-model="unitList[$index+1].checked" ng-true-value="1" ng-false-value="0" class="pointer" />
+                        <a href="" ng-click="redirectToPackGoods($index+1)" class="pointer">{{unitList[$index+1].unitLabel}}</a>
+                        <a href="" ng-if="currentFlight.actionCode=='CR'" ng-click="deleteUnit($index+1)" class="red-font">删除</a>
+                        <a href="" ng-if="currentFlight.actionCode=='CR'" ng-click="redirectToPackGoods($index+1)">装包</a>
+                    </div>
+                </div>
+                <!--<div ng-show="currentFlight.actionCode=='CR'">-->
+                    <!--<span>新增分箱：</span>-->
+                    <!--<span>-->
+                        <!--{{currentFlight.mawbCode}}--->
+                        <!--<input ng-model="newUnitLabelNo" type="text" maxlength="18" size="5" >-->
+                        <!--<a ng-show="newUnitLabelNo != ''" ng-click="saveNewUnit()">保存分箱</a>-->
+                    <!--</span>-->
+                <!--</div>-->
+            </div>
+            <!-- modal-body end -->
+
+            <!-- modal-footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="saveNewUnitSelf()">
+                    <i class="glyphicon glyphicon-floppy-save" />新增分箱
+                </button>
+                <button ng-show="unitList.length > 0" type="button" class="btn btn-primary" ng-click="printAllUnitLabelOfSector()">
+                    <i class="glyphicon glyphicon-print" />打印全部分箱
+                </button>
+                <button ng-show="unitList.length > 0" type="button" class="btn btn-primary" ng-click="printSelectedUnitLabel()">
+                    <i class="glyphicon glyphicon-print" />打印勾选分箱
+                </button>
+                <button type="button" class="btn btn-default" ng-click="cancelUnitModal()">
+                    <i class="glyphicon glyphicon-remove" />关闭
+                </button>
+            </div>
+            <!-- modal-footer end -->
+        </div>
+    </div>
+</div>

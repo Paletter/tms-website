@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">货物装包</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">分箱号</span>
+                            <input type="text" class="form-control text-control" id="unitLabel" placeholder="UNIT NO"
+                                   ng-model="unitModel.unitLabel"
+                                   ng-keypress="unitLabelKeyPressQueryEvent($event)"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">包裹号</span>
+                            <input type="text" class="form-control text-control" id="packNo" placeholder="PIECES NO" style="height:30px"
+                                   ng-model="unitModel.packNo"
+                                   ng-keypress="packNoKeyPressQueryEvent($event)"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- panel-body end -->
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-show="unit != null">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12">实重：{{totalActualWeight.toFixed(2)}}&nbsp;{{UnitsConfig.weightUnit}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">件数：{{totalQty}}</div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>包裹号</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in unitCsmList">
+                            <td>{{$index + 1}}</td>
+                            <td>{{item.piecesNo}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- panel-body end -->
+        </div>
+    </div>
+</div>

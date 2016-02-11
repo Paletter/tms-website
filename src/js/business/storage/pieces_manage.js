@@ -7,7 +7,7 @@ define(function() {
             }
         };
     	$scope.pageInfoInitial = function() {
-            $scope.pgPageInfo = {pageNum:1, pageSize:20};
+            $scope.pgPageInfo = {pageNum:1, pageSize:10};
         };
         //查询分单信息
         $scope.searchPiecesList = function() {

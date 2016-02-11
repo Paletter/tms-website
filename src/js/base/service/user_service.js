@@ -1,5 +1,5 @@
 define(function () {
-    return ['$http','$q','BaseHttp','$rootScope', function($http, $q,BaseHttp,$rootScope) {
+    return ['$http','$q','BaseHttp','$rootScope',"Dialog","$location", function($http, $q,BaseHttp,$rootScope, Dialog, $location) {
         this.getUserInfo = function(){
             var deferred = $q.defer();
             BaseHttp.post('/LoginController/getCurrentUserDetail').success(function(data){
@@ -26,6 +26,7 @@ define(function () {
                     }
                 }).error(function(data){
                     deferred.reject(false);
+                    $location.patch("/maintain.html");
                 });
             }else{
                 deferred.resolve(true);

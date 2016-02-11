@@ -1,127 +1,124 @@
 <div class="row">
-    <div class="col-md-12" >
-    <div class="panel panel-deepblue">
-        <div class="panel-heading">
-            <h4>称重</h4>
-        </div>
-        <div class="panel-body">
+    <div class="col-lg-12">
+        <h1 class="page-header">称重</h1>
+    </div>
+</div>
 
-            <table class="table-td-padding-tb-3">
-                <tr>
-                    <td style="width: 100px;"></td>
-                    <td style="width: 400px;"></td>
-
-                    <td style="width: 150px;"></td>
-                    <td style="width: 400px;"></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;"><span class="span-control">物流单号：</span></td>
-                    <td style="text-align: left;">
-                        <div class="input-group-sm col-md-12">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">关联号</span>
                             <input type="text" class="form-control" id="logisticNo" placeholder="LOGISTICS NO"
                                    ng-model="piecesResultVo.logisticsNo"
                                    ng-change="logisticsNoChange();"
-                                   ng-keydown="keyPressQueryEvent($event);" >
+                                   ng-keydown="keyPressQueryEvent($event);" />
                         </div>
-                    </td>
+                    </div>
 
-                    <td style="text-align: right;"><span class="span-control">实重({{UnitsConfig.weightUnit}})：</span></td>
-                    <td style="text-align: left;">
-                        <div class="input-group-sm col-md-12">
+                    <div class="col-sm-6">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">实重</span>
                             <input type="text" class="form-control text-control" id="acturalWeight" placeholder="WEIGHT"
                                    ng-model="piecesResultVo.actualWeight"
                                    ng-readonly="isNotSearchPieces"
                                    ng-keydown="keyPressEventOfActualWeight($event);"/>
+                            <span class="input-group-addon">{{UnitsConfig.weightUnit}}</span>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;"><span class="span-control">客户代码：</span></td>
-                    <td style="text-align: left;">
-                        <div class="input-group-sm col-md-5">
-                            <input type="text" class="form-control" id="memberCode" placeholder="MEMBER CODE" list="memberCodeLinkList"
-                                   ng-model="piecesResultVo.memberCode"
-                                   ng-readonly="isNotSearchPieces || (piecesResultVo.tmPiecesId && piecesResultVo.tmConsignmentId)"
-                                   ng-change="memberCodeChange()"
-                                   ng-keydown="keyPressStockInEvent($event);" />
-                        </div>
-                    </td>
-
-                    <td style="text-align: right;"><span class="span-control">体积重({{UnitsConfig.weightUnit}})：</span></td>
-                    <td style="text-align: left;">
-                        <div class="input-group-sm col-md-6">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">体积重</span>
                             <input type="text" class="form-control" placeholder="VOLUME WEIGHT" readonly
                                    ng-model="piecesResultVo.volumeWeight" />
+                            <span class="input-group-addon">{{UnitsConfig.weightUnit}}</span>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default"
+                                        ng-disabled="isNotSearchPieces"
+                                        ng-click="showVolumeWeightModal()"><i class="fa fa-keyboard-o"></i></button>
+                            </span>
                         </div>
-                        <button type="button" ng-click="showVolumeWeightModal()" class="btn btn-primary btn-sm">Calculate</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;"><span class="span-control">包裹号：</span></td>
-                    <td style="text-align: left;">
-                        <div class="input-group-sm col-md-12">
-                            <input type="text" class="form-control text-control" placeholder="PIECES NO" readonly
-                                   ng-model="piecesResultVo.piecesNo" />
-                        </div>
-                    </td>
+                    </div>
+                </div>
 
-                    <td style="text-align: right;"><span class="span-control">运单号：</span></td>
-                    <td style="text-align: left;">
-                        <div class="input-group-sm col-md-12">
-                            <input type="text" class="form-control text-control" placeholder="CONSIGNMENT NO" readonly
-                                   ng-model="piecesResultVo.consignmentNo" />
-                        </div>
-                    </td>
-                </tr>
-            </table>
+                <div class="row" ng-show="!isNotSearchPieces">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-primary" ng-click="clickBtnStockIn()"><i class="glyphicon glyphicon-floppy-save"></i><i class="glyphicon glyphicon-print"></i>入库</button>
+                        <button type="button" class="btn btn-primary" ng-click="printPiecesStorageLabel()"><i class="glyphicon glyphicon-print"></i>打印标签</button>
+                    </div>
+                </div>
+            </div>
+            <!-- panel-body end -->
         </div>
-        <div class="panel-footer btn-control btn-control-center" ng-show="!isNotSearchPieces">
-            <button type="button" class="btn btn-sm btn-primary " ng-click="clickBtnStockIn()"><span class="glyphicon glyphicon-print">(Stock/Print)入库/打印标签</span></button>
-            <button type="button" class="btn btn-sm btn-primary " ng-click="printPiecesStorageLabel()"><span class="glyphicon glyphicon-print">(Print)打印标签</span></button>
-        </div>
-        <div id="webcam" style="width: 250px;height: 200px;margin-left: 20px;" ></div>
     </div>
+</div>
+<div class="row" ng-show="piecesResultVo.tmPiecesId">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-4">包裹号：{{piecesResultVo.piecesNo}}</div>
+                    <div class="col-sm-4">运单号：{{piecesResultVo.consignmentNo}}</div>
+                </div>
+            </div>
+            <!-- panel-body end -->
+        </div>
     </div>
 </div>
 
+<!-- Volume weight Modal -->
 <div class="modal" id="volumeWeightModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog" style="width:350px">
-        <div class="modal-content" style="height:280px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">体积重</h4>
+                <button type="button" class="close" ng-click="cancelVolumeWeightModal()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">计算体积重</h4>
             </div>
+            <!-- modal-body -->
             <div class="modal-body">
                 <div class="row">
-				    <div class="col-md-12">
-				        <div class="panel">
-			                <div class="panel-body">
-			                	<div class="row row-form col-md-13">
-			                    	<div class="input-group input-group-sm margin-tb-5">
-				                    	<span class="input-group-addon span-control">(Length)长({{UnitsConfig.volumeUnit}})：</span>
-			                    		<input ng-model="piecesResultVo.length" id="length" placeholder="LENGTH" maxlength="5" type="text" class="form-control">
-			                    	</div>
-			                    	<div class="input-group input-group-sm margin-tb-5">
-				                    	<span class="input-group-addon span-control">&nbsp;&nbsp;(Width)宽({{UnitsConfig.volumeUnit}})：</span>
-			                    		<input ng-model="piecesResultVo.width" placeholder="WIDTH" maxlength="5" type="text" class="form-control">
-			                    	</div>
-			                    	<div class="input-group input-group-sm margin-tb-5">
-				                    	<span class="input-group-addon span-control">&nbsp;(Height)高({{UnitsConfig.volumeUnit}})：</span>
-			                    		<input ng-model="piecesResultVo.height" placeholder="HEIGHT" maxlength="5" type="text" class="form-control">
-			                    	</div>
-			                    </div>
-			                </div>
-				        </div>
-				    </div>
-				</div> 
+                    <div class="col-sm-12">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">长</span>
+                            <input type="text" class="form-control" placeholder="LENGTH" maxlength="5" ng-model="piecesResultVo.length" id="length"/>
+                            <span class="input-group-addon">{{UnitsConfig.volumeUnit}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">宽</span>
+                            <input ng-model="piecesResultVo.width" placeholder="WIDTH" maxlength="5" type="text" class="form-control" />
+                            <span class="input-group-addon">{{UnitsConfig.volumeUnit}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">高</span>
+                            <input ng-model="piecesResultVo.height" placeholder="HEIGHT" maxlength="5" type="text" class="form-control" />
+                            <span class="input-group-addon">{{UnitsConfig.volumeUnit}}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="panel-footer btn-control btn-control-center">
-            	<button type="button" class="btn btn-primary btn-sm" ng-click="calculateVolumeWeight()">
-                	<span class="glyphicon glyphicon-ok">计算体积重</span>
-                </button>
-                <button type="button" class="btn btn-primary btn-sm" ng-click="cancelVolumeWeightModal()">
-                	<span class="glyphicon glyphicon-remove">取消</span>
-                </button>
-		     </div>
+            <!-- modal-body end -->
+
+            <!-- modal-footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="calculateVolumeWeight()"><i class="glyphicon glyphicon-ok" />计算体积重</button>
+                <button type="button" class="btn btn-default" ng-click="cancelVolumeWeightModal()"><i class="glyphicon glyphicon-remove" />取消</button>
+            </div>
+            <!-- modal-footer end -->
         </div>
     </div>
 </div>

@@ -25,10 +25,6 @@ define(['base/base_module',
                 });
             }
         });
-
-        $rootScope.cacheFactory = $cacheFactory;
-        var cache = $rootScope.cacheFactory("test", {capacity: 3});
-        cache.put("b", 2);
     }]);
 
     angular.bootstrap(document,['mainApp']);

@@ -12,11 +12,16 @@ define(function () {
                 });
             })
         };
+        //变更打印/下载模式
         $scope.changePrintMode = function(mode) {
             $rootScope.printMode = mode;
         };
+        //隐藏菜单（响应模式）
+        $scope.hideMenu = function() {
+            $("#menu").removeClass("in");
+        };
         var initialize = function(){
-
+            $rootScope.screenWidth = $(window).innerWidth() > 0 ? $(window).innerWidth() : $(screen)[0].width;
         };
         initialize();
     }];

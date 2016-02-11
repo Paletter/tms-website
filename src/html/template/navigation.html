@@ -1,15 +1,14 @@
-<div id="site_main_nav" class="col-md-2" >
-    <div class="panel panel-deepblue">
-        <div  class="panel-heading">
-            <h4>菜单</h4>
-        </div>
-        <div class="panel-body panel-deepblue" style="max-height:600px; overflow:auto">
-            <ul ng-repeat="menu in loginUser.menuVoList">
-                <p style="font-size: 14px;font-weight: bold;text-align: left;">{{menu.category}}</p>
-                <li style="text-align: left;" ng-repeat="sub in menu.menuSubList">
-                    <a href="{{sub.resourceUrl}}">{{$index+1}}.{{sub.resourceName}}</a>
-                </li>
-            </ul>
-        </div>
+<div class="navbar-default sidebar" role="navigation">
+    <div id="menu" class="sidebar-nav navbar-collapse" ng-class="{collapse:screenWidth < 768}">
+        <ul class="nav" id="side-menu">
+            <li ng-repeat="menu in loginUser.menuVoList">
+                <a href="" class="font-weight-bold"><i class="fa fa-angle-right fa-fw"></i>{{menu.category}}</a>
+                <ul class="nav nav-second-level">
+                    <li ng-repeat="sub in menu.menuSubList" ng-click="hideMenu();">
+                        <a href="{{sub.resourceUrl}}" style="padding-top:3px;padding-bottom:3px;" >{{sub.resourceName}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </div>

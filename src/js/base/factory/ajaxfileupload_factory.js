@@ -1,6 +1,3 @@
-/**
- * Created by Jeng on 2014/6/1.
- */
 define(['lib/ajaxfileupload/ajaxfileupload'],function (ajaxfileupload) {
     return ['AppConfig',function(AppConfig) {
         return {

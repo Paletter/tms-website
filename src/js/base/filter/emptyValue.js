@@ -4,7 +4,7 @@ define(function () {
             if(sourceVal == null
                || sourceVal == "undefined"
                || typeof sourceVal == "undefined"
-               || StringUtils.isEmpty(sourceVal)) {
+               || sourceVal == '') {
 
                 return emptyVal;
             } else {

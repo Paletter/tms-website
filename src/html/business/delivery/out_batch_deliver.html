@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">批次出库</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">批次号</span>
+                            <input ng-model="outBatchNo" type="text" class="form-control text-control" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">包裹号</span>
+                            <input type="text" class="form-control text-control" id="queryNo"
+                                   ng-model="queryParams.queryNo"
+                                   ng-disabled="outBatchStatus == 'OUT'"
+                                   ng-keydown="kerPressQueryPiecesInfosEvent($event);" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- panel-body end -->
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-show="tmOutBatchId != null">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12">数量：{{deliveryPiecesList.length}}</div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>包裹号</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in deliveryPiecesList" ng-show="row.rowStatus != 'remove'">
+                            <td>{{$index + 1}}</td>
+                            <td>{{item.piecesNo}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-primary" ng-click="packPiecesInBatch()" ng-disabled="outBatchStatus == 'OUT'" ><span class="glyphicon glyphicon-floppy-save">保存</span></button>
+                    </div>
+                </div>
+            </div>
+            <!-- panel-body end -->
+        </div>
+    </div>
+</div>

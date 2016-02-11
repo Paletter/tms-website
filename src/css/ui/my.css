@@ -1,0 +1,20 @@
+body {
+    font: 13px/1.5 Helvetica, "微软雅黑", "黑体", Arial, Tahoma;
+}
+.font-weight-bold {font-weight:bold;}
+.red-font {color:red;}
+.align-right {text-align: right;}
+.clear-bg {background-color: transparent;}
+.clear-bor {border: none;}
+.bor-grid [class^=col-] {border: solid black 1px;}
+.modal-body-sub {position: relative; padding: 10px;}
+.date-input {cursor: pointer;background-color: #fff !important;}
+.pointer {cursor: pointer;}
+.auto-overflow {overflow: auto;}
+
+.max-width-768 {}
+@media (max-width: 768px) {
+    .max-width-768 {
+        display: none;
+    }
+}

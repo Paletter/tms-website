@@ -1,20 +1,27 @@
 <div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-deepblue">
-            <div class="panel-heading">
-                <h4>包裹下架</h4>
-            </div>
+    <div class="col-lg-12">
+        <h1 class="page-header">包裹下架</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
             <div class="panel-body">
-                <div class="row row-form col-md-10">
-                    <div class="col-md-5 row-control">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon span-control">下架包裹号：</span>
-                            <input ng-model="putDown.putDownNo" ng-keydown="putDownNoKeyPressEvent($event);" ng-change="putDown.putDownNo = putDown.putDownNo.toUpperCase();"
-                            	id="putDownNo" placeholder="PIECES NO" type="text" class="form-control text-control">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">包裹号</span>
+                            <input type="text" class="form-control text-control" id="putDownNo" placeholder="PIECES NO"
+                                   ng-model="putDown.putDownNo"
+                                   ng-keydown="putDownNoKeyPressEvent($event);"
+                                   ng-change="putDown.putDownNo = putDown.putDownNo.toUpperCase();" />
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- panel-body end -->
         </div>
     </div>
 </div>

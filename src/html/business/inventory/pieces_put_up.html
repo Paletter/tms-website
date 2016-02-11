@@ -1,43 +1,66 @@
 <div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-deepblue">
-            <div class="panel-heading">
-                <h4>包裹上架</h4>
-            </div>
+    <div class="col-lg-12">
+        <h1 class="page-header">包裹上架</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
             <div class="panel-body">
-                <div class="row row-form col-md-10">
-                    <div class="col-md-4 row-control">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon span-control">库位号：</span>
-                            <input ng-model="putUp.locCode" ng-keydown="locCodeKeyPressEvent($event);" ng-change="putUp.locCode = putUp.locCode.toUpperCase();wmLocation = {};"
-                            	id="locCode" placeholder="LOC CODE" type="text" class="form-control text-control">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">库位号</span>
+                            <input type="text" class="form-control text-control" id="locCode" placeholder="LOC CODE"
+                                   ng-model="putUp.locCode"
+                                   ng-keydown="locCodeKeyPressEvent($event);"
+                                   ng-change="putUp.locCode = putUp.locCode.toUpperCase();wmLocation = {};" />
                         </div>
                     </div>
-                    <div class="col-md-5 row-control">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon span-control">上架包裹号：</span>
-                            <input ng-model="putUp.putUpNo" ng-keydown="putNoKeyPressEvent($event);" ng-change="putUp.putUpNo = putUp.putUpNo.toUpperCase();"
-                            	ng-readonly="!wmLocation.wmLocationId" id="putUpNo" placeholder="PIECES NO" type="text" class="form-control text-control">
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">包裹号</span>
+                            <input type="text" class="form-control text-control" id="putUpNo" placeholder="PIECES NO"
+                                   ng-model="putUp.putUpNo"
+                                   ng-keydown="putNoKeyPressEvent($event);"
+                                   ng-change="putUp.putUpNo = putUp.putUpNo.toUpperCase();"
+                                   ng-readonly="!wmLocation.wmLocationId" />
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="panel-footer btn-control">
-	            	<div class="row row-form">
-	            		<div class="col-md-12">
-					        <div>
-								<table ng-show="wmLocationCurrentList.length > 0" style="width:100%;">
-									<tr align="center">
-										<td style="float:left;width:30%;">包裹号</td>
-									</tr>
-									<tr ng-repeat="item in wmLocationCurrentList">
-										<td style="float:left;width:30%;text-align:center;">{{item.piecesNo}}&nbsp;</td>
-									</tr>
-						        </table>
-						   </div>  
-				        </div>
-	                </div>
+            <!-- panel-body end -->
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-show="wmLocation.wmLocationId">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>包裹号</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in wmLocationCurrentList">
+                            <td>{{$index + 1}}</td>
+                            <td>{{item.piecesNo}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <!-- panel-body end -->
         </div>
     </div>
 </div>

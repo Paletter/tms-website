@@ -1,326 +1,262 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">包裹管理</h1>
+    </div>
+</div>
 
 <div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-deepblue">
-            <div class="panel-heading">
-                <h4>包裹管理</h4>
-            </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
             <div class="panel-body">
-                <div class="row row-form">
-                    <div class="col-md-3 row-control">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon span-control">物流单号：</span>
-                            <input ng-model="queryParams.logisticsNo" ng-keydown="keyPressSearcherEvent($event);" 
-                            	placeholder="LOGISTICS NO" type="text" class="form-control text-control">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">物流单号</span>
+                            <input ng-model="queryParams.logisticsNo" ng-keydown="keyPressSearcherEvent($event);"
+                                   type="text" class="form-control text-control">
                         </div>
                     </div>
-                    <div class="col-md-3 row-control">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon span-control">包裹号：</span>
-                            <input ng-model="queryParams.piecesNo" ng-keydown="keyPressSearcherEvent($event);" 
-                            	placeholder="PIECES NO" type="text" class="form-control text-control">
+                    <div class="col-sm-3">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">包裹号</span>
+                            <input ng-model="queryParams.piecesNo" ng-keydown="keyPressSearcherEvent($event);"
+                                   type="text" class="form-control text-control">
                         </div>
                     </div>
-                    <div class="col-md-3 row-control">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon span-control">会员编号：</span>
-                            <input ng-model="queryParams.memberCode" ng-keydown="keyPressSearcherEvent($event);" 
-                            	placeholder="MEMBER CODE" type="text" class="form-control text-control">
+                    <div class="col-sm-3">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">会员编号</span>
+                            <input ng-model="queryParams.memberCode" ng-keydown="keyPressSearcherEvent($event);"
+                                   type="text" class="form-control text-control">
                         </div>
                     </div>
-                    <div class="col-md-3 row-control">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon span-control">在库状态：</span>
+                    <div class="col-sm-3">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">在库状态</span>
                             <select class="form-control select-control" ng-model="queryParams.stockStatus">
-                                <option value="">-- STOCK STATUS --</option>
-                                <option value="IN_STOCK">在库(STOCKED)</option>
-                                <option value="OUT_STOCK">已出库(OUT)</option>
+                                <option value="">无</option>
+                                <option value="IN_STOCK">在库</option>
+                                <option value="OUT_STOCK">已出库</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3 row-control">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon span-control">认领状态：</span>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">下单状态</span>
                             <select class="form-control select-control" ng-model="queryParams.piecesClaimStatus">
-                                <option value="">-- CLAIM STATUS --</option>
-                                <option value="NOT_CLAIM">未认领(NOT)</option>
-                                <option value="CLAIMED">已认领(CLAIMED)</option>
+                                <option value="">无</option>
+                                <option value="NOT_CLAIM">未下单</option>
+                                <option value="CLAIMED">已下单</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4 row-control">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon span-control">入库时间：</span>
-                            <input ng-model="queryParams.startStockedTime" placeholder="START STOCKED TIME" datetimepicker type="text" class="form-control text-control">
-                            <span class="input-group-addon span-control">-</span>
-                            <input ng-model="queryParams.endStockedTime" placeholder="END STOCKED TIME" datetimepicker type="text" class="form-control text-control">
+                    <div class="col-sm-3">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">入库时间</span>
+                            <input ng-model="queryParams.startStockedTime" datetimepicker type="text" class="form-control text-control date-input">
+                            <span class="input-group-addon span-control clear-bg clear-bor">-</span>
+                            <input ng-model="queryParams.endStockedTime" datetimepicker type="text" class="form-control text-control date-input">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="panel-footer btn-control">
-                <button type="button" class="btn btn-sm btn-primary" ng-click="searchPiecesList()">
-                	<span class="glyphicon glyphicon-search" style="font:14px;">查找</span>
-                </button>
+            <!-- panel-body end -->
+
+            <!-- panel-footer -->
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="searchPiecesList()"><i class="glyphicon glyphicon-search" />查找</button>
+                    </div>
+                </div>
             </div>
+            <!-- panel-footer end -->
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
-       	<div class="panel panel-deepblue">
-       		<div class="panel-body">
-				<table border="0" class="table table-striped">
-				<thead>
-					<tr style="padding: 10px">
-                        <th>包裹号</th>
-                        <th>分单号</th>
-                        <th>状态</th>
-                        <th>物流单号</th>
-                        <th>库位号</th>
-                        <th>会员编号</th>
-                        <th>入库时间</th>
-                        <th>重量({{UnitsConfig.weightUnit}})</th>
-                        <th style="text-align: center;">操作</th>
-                    </tr>
-				</thead>
-				<tbody>
-                    <!-- 已认领包裹 -->
-					<tr ng-repeat="row in piecesList" ng-if="row.tmConsignmentId" class="thead-tbl-address" bgcolor="white">
-						<td style="text-align: left;">
-                            <span class="label label-danger ng-binding" ng-if="row.currentActionCode == 'CL'">C</span>
-                            {{row.piecesNo}}
-                        </td>
-						<td style="text-align: left;">{{row.consignmentNo}}</td>
-						<td style="text-align: left;">
-                            <span ng-class="{redfont:row.currentActionCode == 'CL'}"  ng-if="row.autoDisassembleStatus != 1 && row.disassembleStatus != 1">{{row.currentActionDesc}}</span>
-						</td>
-						<td style="text-align: left;">{{row.logisticsNo}}</td>
-						<td style="text-align: left;">{{row.locCode}}</td>
-						<td style="text-align: left;">{{row.memberCode}}</td>
-						<td style="text-align: left;">
-							<span>{{row.checkDate | formatDate:"dateTime"}}</span>
-						</td>
-						<td style="text-align: left;">{{row.actualWeight}}/{{row.volumeWeight}}</td>
-						<td>
-							<div class="btn-group bs-docs-example">
-								<button type="button" class="btn btn-sm btn-primary">操作</button>
-								<button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" id="drop1">
-							    	<span class="caret"></span>
-							  	</button>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="drop1" style="width:50%;min-width:100px;">
-									<li><a href="/receive/pieces_stock_in.html?logisticsNo={{row.logisticsNo}}"><span>入库</span></a></li>
-								    <li><a href="/storage/check_weight.html?consignmentNo={{row.consignmentNo}}"><span>核重</span></a></li>
-                                </ul>
-							</div>
-							<div class="btn-group bs-docs-example">
-								<button type="button" class="btn btn-sm btn-primary">打印&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-								<button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" id="drop2">
-							    	<span class="caret"></span>
-							  	</button>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="drop2" style="width:50%;min-width:120px;">
-									<li><a ng-click="printPiecesLabel($index)"><span>标签</span></a></li>
-							  	</ul>
-							</div>
-                            <button type="button" class="btn btn-sm btn-primary" ng-click="queryPiecesDetail($index)">明细</button>
-                     	</td>
-                   	</tr>
 
-                    <!-- 未认领包裹 -->
-                   	<tr ng-repeat="row in piecesList" ng-if="!row.tmConsignmentId" class="thead-tbl-address" bgcolor="white">
-						<td style="text-align: left;">
-                            <span ng-show="UnitsConfig.countryCode == 'JP'">{{row.piecesNo}}/{{row.piecesMemo}}</span>
-                            <span ng-show="UnitsConfig.countryCode != 'JP'">{{row.piecesNo}}</span>
-						</td>
-						<td style="text-align: left;">未认领</td>
-						<td style="text-align: left;">在库</td>
-						<td style="text-align: left;">{{row.logisticsNo}}</td>
-						<td style="text-align: left;">{{row.locCode}}</td>
-						<td style="text-align: left;">{{row.memberCode}}</td>
-						<td style="text-align: left;">
-							<span ng-if="row.checkDate != null">{{row.checkDate | formatDate:"dateTime"}}</span>
-							<span ng-if="row.checkDate == null && row.ciHistoryDate != null">{{row.ciHistoryDate | formatDate:"dateTime"}}</span>
-						</td>
-                        <td style="text-align: left;">{{row.actualWeight}}/{{row.volumeWeight}}</td>
-						<td>
-							<div class="btn-group bs-docs-example">
-								<button type="button" class="btn btn-sm btn-primary">操作</button>
-								<button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" id="drop3">
-							    	<span class="caret"></span>
-							  	</button>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="drop3" style="width:50%;min-width:100px;">
-                                    <li><a href="/receive/pieces_stock_in.html?logisticsNo={{row.logisticsNo}}"><span>入库</span></a></li>
-                                    <li><a href="/storage/check_weight.html?consignmentNo={{row.consignmentNo}}"><span>核重</span></a></li>
-							  	</ul>
-							</div>
-							<div class="btn-group bs-docs-example">
-								<button type="button" class="btn btn-sm btn-primary">打印&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-								<button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" id="drop4">
-							    	<span class="caret"></span>
-							  	</button>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="drop4" style="width:50%;min-width:100px;">
-									<li><a ng-click="printPiecesLabel($index)"><span>标签</span></a></li>
-							  	</ul>
-							</div>
-                            <button type="button" class="btn btn-sm btn-primary" ng-click="queryPiecesDetail($index)">明细</button>
-                     	</td>
-              	 	</tr>
-				</tbody>
-				</table>
-				<div><pagination pg-page-info="pgPageInfo"></pagination></div>
-			</div>
-		</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>包裹号</th>
+                            <th>分单号</th>
+                            <th>状态</th>
+                            <th>物流单号</th>
+                            <th>库位号</th>
+                            <th>会员编号</th>
+                            <th>入库时间</th>
+                            <th>重量 &nbsp;{{UnitsConfig.weightUnit}}</th>
+                            <th style="text-align: center;">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- 已认领包裹 -->
+                        <tr ng-repeat="row in piecesList" ng-if="row.tmConsignmentId" class="thead-tbl-address" bgcolor="white">
+                            <td>
+                                <span class="label label-danger ng-binding" ng-if="row.currentActionCode == 'CL'">C</span>
+                                {{row.piecesNo}}
+                            </td>
+                            <td>{{row.consignmentNo}}</td>
+                            <td>{{row.userViewCode}}</td>
+                            <td>{{row.logisticsNo}}</td>
+                            <td>{{row.locCode}}</td>
+                            <td>{{row.memberCode}}</td>
+                            <td>
+                                <span>{{row.checkDate | formatDate:"dateTime"}}</span>
+                            </td>
+                            <td>{{row.actualWeight}}/{{row.volumeWeight}}</td>
+                            <td>
+                                <div class="btn-group bs-docs-example">
+                                    <button type="button" class="btn btn-sm btn-primary">操作</button>
+                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" id="drop1"><span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                                        <li><a href="/receive/pieces_stock_in.html?logisticsNo={{row.logisticsNo}}"><span>入库</span></a></li>
+                                        <li><a href="/storage/check_weight.html?consignmentNo={{row.consignmentNo}}"><span>核重</span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group bs-docs-example">
+                                    <button type="button" class="btn btn-sm btn-primary">打印&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" id="drop2"><span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
+                                        <li><a ng-click="printPiecesLabel($index)"><span>标签</span></a></li>
+                                    </ul>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-primary" ng-click="queryPiecesDetail($index)">明细</button>
+                            </td>
+                        </tr>
+
+                        <!-- 未认领包裹 -->
+                        <tr ng-repeat="row in piecesList" ng-if="!row.tmConsignmentId" class="thead-tbl-address" bgcolor="white">
+                            <td>
+                                <span ng-show="UnitsConfig.countryCode == 'JP'">{{row.piecesNo}}/{{row.piecesMemo}}</span>
+                                <span ng-show="UnitsConfig.countryCode != 'JP'">{{row.piecesNo}}</span>
+                            </td>
+                            <td>未认领</td>
+                            <td>{{row.userViewCode}}</td>
+                            <td>{{row.logisticsNo}}</td>
+                            <td>{{row.locCode}}</td>
+                            <td>{{row.memberCode}}</td>
+                            <td>
+                                <span ng-if="row.checkDate != null">{{row.checkDate | formatDate:"dateTime"}}</span>
+                                <span ng-if="row.checkDate == null && row.ciHistoryDate != null">{{row.ciHistoryDate | formatDate:"dateTime"}}</span>
+                            </td>
+                            <td>{{row.actualWeight}}/{{row.volumeWeight}}</td>
+                            <td>
+                                <div class="btn-group bs-docs-example">
+                                    <button type="button" class="btn btn-sm btn-primary">操作</button>
+                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" id="drop3"><span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
+                                        <li><a href="/receive/pieces_stock_in.html?logisticsNo={{row.logisticsNo}}"><span>入库</span></a></li>
+                                        <li><a href="/storage/check_weight.html?consignmentNo={{row.consignmentNo}}"><span>核重</span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group bs-docs-example">
+                                    <button type="button" class="btn btn-sm btn-primary">打印&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" id="drop4"><span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop4">
+                                        <li><a ng-click="printPiecesLabel($index)"><span>标签</span></a></li>
+                                    </ul>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-primary" ng-click="queryPiecesDetail($index)">明细</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <pagination pg-page-info="pgPageInfo"></pagination>
+                </div>
+            </div>
+            <!-- panel-body end -->
+        </div>
     </div>
 </div>
 
-<!-- 包裹明细 -->
+<!-- Pieces detail Modal -->
 <div class="modal" id="piecesDetailModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog" style="width:1050px">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content" style="height:620px;">
             <div class="modal-header">
                 <button type="button" class="close" ng-click="cancelPiecesDetailModal();"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">包裹明细</h4>
             </div>
-            <div class="modal-body" style="padding:10px;overflow-y: auto; height:490px">
-                <div>
-                    <table border="solid black 1px" style="text-align: center;width: 100%;">
-                        <tr>
-                            <td style="text-align: right;width: 100px;">包裹号：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">{{piecesDetail.piecesNo}}</td>
+            <div class="modal-body" style="overflow-y: auto; height:490px">
+                <div class="modal-body-sub">
+                    <div class="row">
+                        <div class="col-sm-12 font-weight-bold">包裹信息</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">包裹号：{{piecesDetail.piecesNo}}</div>
+                        <div class="col-sm-4">运单号：{{piecesDetail.consignmentNo | emptyValue:"无"}}</div>
+                        <div class="col-sm-4">关联号：{{piecesDetail.logisticsNo}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">库位号：{{piecesDetail.locationCode | emptyValue:"无"}}</div>
+                        <div class="col-sm-4">重量：{{piecesDetail.actualWeight}}&nbsp;{{UnitsConfig.weightUnit}}
+                            <span ng-show="piecesDetail.volumeWeight">/{{piecesDetail.volumeWeight}}(L:{{piecesDetail.length}},W:{{piecesDetail.width}},H:{{piecesDetail.height}}&nbsp;{{UnitsConfig.volumeUnit}})</span>
+                        </div>
+                        <div class="col-sm-4">入库时间：{{piecesDetail.checkDate | formatDate: "date"}}</div>
 
-                            <td style="text-align: right;width: 100px;">运单号：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">
-                                <span ng-if="!piecesDetail.consignmentNo">未认领</span>
-                                <span ng-if="piecesDetail.consignmentNo">{{piecesDetail.consignmentNo}}</span>
-                            </td>
-
-                            <td style="text-align: right;width: 100px;">物流号：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">{{piecesDetail.logisticsNo}}</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;width: 100px;">会员编号：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">{{piecesDetail.memberCode}}</td>
-
-                            <td style="text-align: right;width: 100px;">库位号：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">{{piecesDetail.locationCode | emptyValue:"无"}}</td>
-
-                            <td style="text-align: right;width: 100px;">重量({{UnitsConfig.weightUnit}})：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">
-                                {{piecesDetail.actualWeight}}
-                                <span ng-show="piecesDetail.volumeWeight">/{{piecesDetail.volumeWeight}}(L:{{piecesDetail.length}},W:{{piecesDetail.width}},H:{{piecesDetail.height}})</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;width: 100px;">入库时间：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">{{piecesDetail.checkDate | formatDate: "date"}}</td>
-
-                            <td style="text-align: right;width: 100px;">包裹最新状态：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">{{piecesDetail.actionDesc}}</td>
-
-                            <td style="text-align: right;width: 100px;">物流状态：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">{{piecesDetail.userViewCode}}</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;width: 100px;">审核状态：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">
-                                <span ng-if="piecesDetail.auditStatus == null">无</span>
-                                <span ng-if="piecesDetail.auditStatus == 0">未审核</span>
-                                <span ng-if="piecesDetail.auditStatus == 1">审核通过</span>
-                                <span ng-if="piecesDetail.auditStatus == 2">审核拒绝</span>
-                            </td>
-
-                            <td style="text-align: right;width: 100px;">支付状态：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">
-                                <span ng-if="piecesDetail.payStatus == null">无</span>
-                                <span ng-if="piecesDetail.payStatus == 0 || piecesDetail.payStatus == 2">待支付</span>
-                                <span ng-if="piecesDetail.payStatus == 1 || piecesDetail.payStatus == 3">已支付</span>
-                            </td>
-
-                            <td style="text-align: right;width: 100px;">合单状态：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">
-                                <span ng-if="piecesDetail.combinationStatus == 0 || piecesDetail.combinationStatus == null">无</span>
-                                <span ng-if="piecesDetail.combinationStatus == 1">已合单(子单)</span>
-                                <span ng-if="piecesDetail.combinationStatus == 2">已合单(主单)</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;width: 100px;">商品描述(总)：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">{{piecesDetail.goodsDescription | emptyValue: "无"}}</td>
-
-                            <td style="text-align: right;width: 100px;">商品数量(总)：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">{{piecesDetail.piecesItemQty | emptyValue: "无"}}</td>
-
-                            <td style="text-align: right;width: 100px;">增值服务：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">{{piecesDetail.csmVas | emptyValue: "无"}}</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;width: 100px;"><span>包裹备注：</span></td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">{{piecesDetail.memo | emptyValue: "无"}}</td>
-
-                            <td style="text-align: right;width: 100px;">产品线：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">{{piecesDetail.serviceProductName | emptyValue: "无"}}</td>
-
-                            <td style="text-align: right;width: 100px;"></td>
-                            <td style="text-align: left;width: 200px;"></td>
-                        </tr>
-                    </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">包裹最新状态：{{piecesDetail.actionDesc}}</div>
+                        <div class="col-sm-4">物流状态：{{piecesDetail.userViewCode}}</div>
+                        <div class="col-sm-4"></div>
+                    </div>
                 </div>
-                <div>
-                    <div style="margin: 10px auto 10px auto;">出库信息</div>
-                    <table table border="solid black 1px" style="text-align: center;width: 100%;">
-                        <tr>
-                            <td style="text-align: right;width: 100px;">主单号：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">{{piecesDetail.mawbCode | emptyValue: "无"}}</td>
 
-                            <td style="text-align: right;width: 100px;">麻袋号：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">{{piecesDetail.unitLabel | emptyValue: "无"}}</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;width: 100px;">仓库出库快递公司：</td>
-                            <td style="text-align: left;width: 200px;">{{piecesDetail.deliveryName | emptyValue: "无"}}</td>
+                <div class="modal-body-sub">
+                    <div class="row">
+                        <div class="col-sm-12 font-weight-bold">出库信息</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">主单号：{{piecesDetail.mawbCode | emptyValue: "无"}}</div>
+                        <div class="col-sm-6">麻袋号：{{piecesDetail.unitLabel | emptyValue: "无"}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">仓库出库快递公司：{{piecesDetail.deliveryName | emptyValue: "无"}}</div>
+                        <div class="col-sm-6">仓库出库快递单号：{{piecesDetail.deliveryNo | emptyValue: "无"}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">出库批次号：{{piecesDetail.outBatchNo | emptyValue: "无"}}</div>
+                        <div class="col-sm-6"></div>
+                    </div>
+                </div>
 
-                            <td style="text-align: right;width: 100px;">仓库出库快递单号：</td>
-                            <td style="text-align: left;width: 200px;padding-left: 5px;">{{piecesDetail.deliveryNo | emptyValue: "无"}}</td>
-                        </tr>
-                    </table>
-                </div>
-                <div ng-show="consignmentItemList.length > 0">
-                    <div style="margin: 10px auto 10px auto;">货品明细</div>
-                    <table table border="solid black 1px" style="text-align: center;width: 100%;">
-                        <tr>
-                            <td style="text-align: center;">类型</td>
-                            <td style="text-align: center;">品牌</td>
-                            <td style="text-align: center;">品名</td>
-                            <td style="text-align: center;">规格</td>
-                            <td style="text-align: center;">价格</td>
-                            <td style="text-align: center;">数量</td>
-                        </tr>
-                        <tr ng-repeat="csmItem in consignmentItemList">
-                            <td style="text-align: left;padding-left: 5px;">{{csmItem.goodsCode}}</td>
-                            <td style="text-align: left;padding-left: 5px;">{{csmItem.brandName}}</td>
-                            <td style="text-align: left;padding-left: 5px;">{{csmItem.goodsDescription}}</td>
-                            <td style="text-align: left;padding-left: 5px;">{{csmItem.spec}}</td>
-                            <td style="text-align: left;padding-left: 5px;">{{csmItem.amount}}</td>
-                            <td style="text-align: left;padding-left: 5px;">{{csmItem.piecesItemQty}}</td>
-                        </tr>
-                    </table>
-                </div>
-                <div ng-show="piecesHistoryList.length > 0">
-                    <div style="margin: 10px auto 10px auto;">操作记录</div>
-                    <table table border="solid black 1px" style="text-align: center;width: 100%;">
-                        <tr>
-                            <td style="text-align: center;">时间</td>
-                            <td style="text-align: center;">状态</td>
-                            <td style="text-align: center;">操作员</td>
-                            <td style="text-align: center;">描述</td>
-                        </tr>
-                        <tr ng-repeat="piecesHistory in piecesHistoryList">
-                            <td style="text-align: left;width: 150px;word-wrap: break-word;padding-left: 5px;">{{piecesHistory.actionDateTime | formatDate:"dateTime"}}</td>
-                            <td style="text-align: left;width: 100px;word-wrap: break-word;padding-left: 5px;">{{piecesHistory.actionDesc}}</td>
-                            <td style="text-align: left;width: 100px;word-wrap: break-word;padding-left: 5px;">{{piecesHistory.actionUserName}}</td>
-                            <td style="text-align: left;word-wrap: break-word;padding-left: 5px;">{{piecesHistory.memo}}</td>
-                        </tr>
-                    </table>
+                <div class="modal-body-sub">
+                    <div class="row">
+                        <div class="col-sm-12 font-weight-bold">操作记录</div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>时间</th>
+                                <th>状态</th>
+                                <th>操作员</th>
+                                <th>描述</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="piecesHistory in piecesHistoryList">
+                                <td>{{piecesHistory.actionDateTime | formatDate:"dateTime"}}</td>
+                                <td>{{piecesHistory.actionDesc}}</td>
+                                <td>{{piecesHistory.actionUserName}}</td>
+                                <td>{{piecesHistory.memo}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
