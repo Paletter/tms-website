@@ -1,0 +1,225 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">用户管理</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">用户名</span>
+                            <input ng-model="queryParams.userName" ng-keydown="keyPressSearcherEvent($event);"
+                                   type="text" class="form-control text-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">全名</span>
+                            <input ng-model="queryParams.fullName" ng-keydown="keyPressSearcherEvent($event);"
+                                   type="text" class="form-control text-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- panel-body end -->
+
+            <!-- panel-footer -->
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="addUser()"><i class="glyphicon glyphicon-plus"/>创建用户</button>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="searchUserList()"><i class="glyphicon glyphicon-search" />查找</button>
+                    </div>
+                </div>
+            </div>
+            <!-- panel-footer end -->
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>全名</th>
+                            <th>公司</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="row in userList" class="thead-tbl-address" ng-class="{'fc-gray-light': !row.isActive}">
+                            <td>{{row.userName}}</td>
+                            <td>{{row.fullName}}</td>
+                            <td>{{row.companyName}}</td>
+                            <td>
+                                <span ng-show="row.isActive">有效</span>
+                                <span ng-show="!row.isActive">无效</span>
+                            </td>
+                            <td>
+                                <a href="" ng-click="editUser($index)">编辑</a>
+                                <a href="" ng-click="resetPwd($index)">重置密码</a>
+                                <a href="" ng-show="row.isActive" ng-click="inactiveUser($index)">失效</a>
+                                <a href="" ng-show="!row.isActive" ng-click="activeUser($index)">生效</a>
+                                <a href="" ng-show="row.isActive" ng-click="userAuthWare($index)">仓库</a>
+                                <a href="" ng-show="row.isActive" ng-click="userAuthRole($index)">角色</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <pagination pg-page-info="pgPageInfo"></pagination>
+                </div>
+            </div>
+            <!-- panel-body end -->
+        </div>
+    </div>
+</div>
+
+<!-- User Modal -->
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="cancelUserModal();"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 ng-if="!currentUser.cdUserId" class="modal-title">创建用户</h4>
+                <h4 ng-if="currentUser.cdUserId" class="modal-title">编辑用户</h4>
+            </div>
+            <!-- modal-body -->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">用户名</span>
+                            <input type="text" class="form-control" maxlength="20"
+                                   ng-model="currentUser.userName"
+                                   ng-disabled="currentUser.cdUserId" />
+                        </div>
+                    </div>
+                    <div class="col-md-12" ng-show="!currentUser.cdUserId">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">密码</span>
+                            <input type="text" class="form-control" maxlength="20"
+                                   ng-model="currentUser.pwd" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">全名</span>
+                            <input type="text" class="form-control" maxlength="30"
+                                   ng-model="currentUser.fullName" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">备注</span>
+                            <textarea class="form-control" rows="2"
+                                      ng-model="currentUser.memo" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">所属公司</span>
+                            <select class="form-control select-control "
+                                    ng-model="currentUser.companyCode"
+                                    ng-options="row.companyCode as row.companyName for row in companyList">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal-body end -->
+
+            <!-- modal-footer -->
+            <div class="modal-footer">
+                <button type="button" ng-if="!currentUser.cdUserId" class="btn btn-primary" ng-click="saveNewUser()"><i class="glyphicon glyphicon-floppy-save"/>保存</button>
+                <button type="button" ng-if="currentUser.cdUserId" class="btn btn-primary" ng-click="updateUser()"><i class="glyphicon glyphicon-floppy-save"/>保存</button>
+                <button type="button" class="btn btn-default" ng-click="cancelUserModal();"><i class="glyphicon glyphicon-remove" />取消</button>
+            </div>
+            <!-- modal-footer end -->
+        </div>
+    </div>
+</div>
+
+<!-- Auth warehoue Modal -->
+<div class="modal fade" id="authWareModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="cancelAuthWareModal();"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">仓库权限</h4>
+            </div>
+            <!-- modal-body -->
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <div class="col-sm-12 font-weight-bold">已有权限(点击移除)</div>
+                        <div class="col-sm-12" ng-repeat="row in currentUserAuthWareList">
+                            <a href="" ng-click="removeUserAuthWare($index)">{{row.warehouseDesc}}</a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="col-sm-12 font-weight-bold">其他权限(点击添加)</div>
+                        <div class="col-sm-12" ng-repeat="row in currentUserVoidWareList">
+                            <a href="" ng-click="addUserAuthWare($index)">{{row.warehouseDesc}}</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- modal-body end -->
+
+            <!-- modal-footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="cancelAuthWareModal();"><i class="glyphicon glyphicon-remove" />取消</button>
+            </div>
+            <!-- modal-footer end -->
+        </div>
+    </div>
+</div>
+
+<!-- Auth roel Modal -->
+<div class="modal fade" id="authRoleModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="cancelAuthRoleModal();"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">角色</h4>
+            </div>
+            <!-- modal-body -->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <select class="form-control" ng-model="choseRoleId">
+                            <option value="">请选择</option>
+                            <option ng-repeat="row in roleList" ng-selected="row.cdRoleId == currentUserAuthRole.cdRoleId" value="{{row.cdRoleId}}">{{row.descpt}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- modal-body end -->
+
+            <!-- modal-footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="updateUserAuthRole()"><i class="glyphicon glyphicon-floppy-save"/>保存</button>
+                <button type="button" class="btn btn-default" ng-click="cancelAuthRoleModal();"><i class="glyphicon glyphicon-remove" />取消</button>
+            </div>
+            <!-- modal-footer end -->
+        </div>
+    </div>
+</div>

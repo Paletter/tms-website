@@ -127,7 +127,7 @@
 </div>
 
 <!-- Flight Modal -->
-<div class="modal" id="flightModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="flightModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -137,53 +137,55 @@
             </div>
             <!-- modal-body -->
             <div class="modal-body">
-                <div class="col-md-12">
-                    <div class="form-group input-group input-group-sm">
-                        <span class="input-group-addon">主单号</span>
-                        <input type="text" class="form-control" maxlength="20"
-                               ng-model="currentFlight.mawbCode"
-                               ng-disabled="currentFlight.tmSectorId" />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">主单号</span>
+                            <input type="text" class="form-control" maxlength="20"
+                                   ng-model="currentFlight.mawbCode"
+                                   ng-disabled="currentFlight.tmSectorId" />
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group input-group input-group-sm">
-                        <span class="input-group-addon">航班号</span>
-                        <input type="text" class="form-control" maxlength="30"
-                               ng-model="currentFlight.sectorLabel" />
+                    <div class="col-md-12">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">航班号</span>
+                            <input type="text" class="form-control" maxlength="30"
+                                   ng-model="currentFlight.sectorLabel" />
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group input-group input-group-sm">
-                        <span class="input-group-addon">始发站</span>
-                        <select class="form-control select-control"
-                                ng-model="currentFlight.origPort"
-                                ng-options="p.portCode as p.portName for p in portList">
-                            <option value="">请选择</option>
-                        </select>
+                    <div class="col-md-12">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">始发站</span>
+                            <select class="form-control select-control"
+                                    ng-model="currentFlight.origPort"
+                                    ng-options="p.portCode as p.portName for p in portList">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group input-group input-group-sm">
-                        <span class="input-group-addon">目的站</span>
-                        <select class="form-control select-control "
-                                ng-model="currentFlight.destPort"
-                                ng-options="p.portCode as p.portName for p in portList">
-                            <option value="">请选择</option>
-                        </select>
+                    <div class="col-md-12">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">目的站</span>
+                            <select class="form-control select-control "
+                                    ng-model="currentFlight.destPort"
+                                    ng-options="p.portCode as p.portName for p in portList">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group input-group input-group-sm">
-                        <span class="input-group-addon">ETD</span>
-                        <input type="text" class="form-control date-input" readonly date-config="{format:'yyyy-mm-dd'}" datetimepicker
-                               ng-model="currentFlight.etd" />
+                    <div class="col-md-12">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">ETD</span>
+                            <input type="text" class="form-control date-input" readonly date-config="{format:'yyyy-mm-dd'}" datetimepicker
+                                   ng-model="currentFlight.etd" />
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group input-group input-group-sm">
-                        <span class="input-group-addon">ETA</span>
-                        <input type="text" class="form-control date-input" readonly date-config="{format:'yyyy-mm-dd'}" datetimepicker
-                               ng-model="currentFlight.eta" />
+                    <div class="col-md-12">
+                        <div class="form-group input-group input-group-sm">
+                            <span class="input-group-addon">ETA</span>
+                            <input type="text" class="form-control date-input" readonly date-config="{format:'yyyy-mm-dd'}" datetimepicker
+                                   ng-model="currentFlight.eta" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -201,7 +203,7 @@
 </div>
 
 <!-- Unit Modal -->
-<div class="modal" id="unitModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="unitModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

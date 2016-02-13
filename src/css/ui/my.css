@@ -1,6 +1,7 @@
 body {
     font: 13px/1.5 Helvetica, "微软雅黑", "黑体", Arial, Tahoma;
 }
+a{cursor: pointer;}
 .font-weight-bold {font-weight:bold;}
 .red-font {color:red;}
 .align-right {text-align: right;}
@@ -11,6 +12,8 @@ body {
 .date-input {cursor: pointer;background-color: #fff !important;}
 .pointer {cursor: pointer;}
 .auto-overflow {overflow: auto;}
+.edit-td {background-color: transparent;border: none;}
+/*.edit-td:focus {background-color: #eee;}*/
 
 .max-width-768 {}
 @media (max-width: 768px) {
@@ -18,3 +21,10 @@ body {
         display: none;
     }
 }
+
+/* Color */
+.fc-gray-darker {color: #222;}
+.fc-gray-dark {color: #333;}
+.fc-gray {color: #555;}
+.fc-gray-light {color: #777;}
+.fc-gray-lighter {color: #eee;}

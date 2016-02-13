@@ -8,6 +8,27 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <!-- panel-body -->
+            <div class="panel-body form-inline">
+                <div class="form-group">
+                    <label class="col-sm-4">标准模板批量导入</label>
+                    <div class="col-sm-6">
+                        <input type="file" id="stockCsmFile" name="stockCsmFile"
+                               onchange="angular.element(this).scope().importStockCsmExcel(this)" multiple>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="" ng-click="printStockCsmImportTemplate()">模板</a>
+                    </div>
+                </div>
+            </div>
+            <!-- panel-body end -->
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
             <div class="panel-body">
                 <div class="row">
                     <div class="col-sm-3">

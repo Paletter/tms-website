@@ -24,5 +24,9 @@ define(function () {
                 });
             }
         };
+        this.fixedDownload = function (url) {
+
+            window.location.href = AppConfig.ctx + url;
+        };
     }];
 });

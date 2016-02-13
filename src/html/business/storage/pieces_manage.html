@@ -158,8 +158,8 @@
                                     <button type="button" class="btn btn-sm btn-primary">操作</button>
                                     <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" id="drop3"><span class="caret"></span></button>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
-                                        <li><a href="/receive/pieces_stock_in.html?logisticsNo={{row.logisticsNo}}"><span>入库</span></a></li>
-                                        <li><a href="/storage/check_weight.html?consignmentNo={{row.consignmentNo}}"><span>核重</span></a></li>
+                                        <li><a href="/receive/pieces_stock_in.html?logisticsNo={{row.logisticsNo}}"><span>称重</span></a></li>
+                                        <li><a href="/storage/check_weight.html?piecesNo={{row.piecesNo}}"><span>核重</span></a></li>
                                     </ul>
                                 </div>
                                 <div class="btn-group bs-docs-example">
@@ -183,7 +183,7 @@
 </div>
 
 <!-- Pieces detail Modal -->
-<div class="modal" id="piecesDetailModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="piecesDetailModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" style="height:620px;">
             <div class="modal-header">

@@ -2,6 +2,7 @@ define([
     'business/welcome',
     'business/login',
     'business/receive/pieces_stock_in',
+    'business/receive/csm_stock_in',
     'business/storage/check_weight',
     'business/storage/pieces_manage',
     'business/inventory/pieces_put_up',
@@ -10,11 +11,15 @@ define([
     'business/delivery/pack_goods',
     'business/delivery/out_batch',
     'business/delivery/out_batch_deliver',
-    'business/other/express'
+    'business/delivery/out_template',
+    'business/other/express',
+    'business/basic/user',
+    'business/basic/role'
 ],function (
     welcome,
     login,
     pieces_stock_in,
+    csm_stock_in,
     check_weight,
     pieces_manage,
     pieces_put_up,
@@ -23,7 +28,10 @@ define([
     pack_goods,
     out_batch,
     out_batch_deliver,
-    express
+    out_template,
+    express,
+    user,
+    role
     ) {
     return ['$routeProvider','$locationProvider',function($routeProvider,$locationProvider) {
 
@@ -45,6 +53,9 @@ define([
         $routeProvider.when("/receive/pieces_stock_in.html:?", {
             templateUrl : "html/business/receive/pieces_stock_in.html",
             controller : pieces_stock_in
+        }).when("/receive/csm_stock_in.html:?", {
+            templateUrl : "html/business/receive/csm_stock_in.html",
+            controller : csm_stock_in
         });
         // Business.Storage
         $routeProvider.when("/storage/check_weight.html:?", {
@@ -75,11 +86,22 @@ define([
         }).when('/delivery/out_batch_deliver.html:?', {
             templateUrl : 'html/business/delivery/out_batch_deliver.html',
             controller : out_batch_deliver
+        }).when('/delivery/out_template.html:?', {
+            templateUrl : 'html/business/delivery/out_template.html',
+            controller : out_template
         });
         // Business.Other
         $routeProvider.when('/other/express.html:?', {
             templateUrl : 'html/business/other/express.html',
             controller : express
+        });
+        // Business.Basic
+        $routeProvider.when('/basic/user.html:?', {
+            templateUrl : 'html/business/basic/user.html',
+            controller : user
+        }).when('/basic/role.html:?', {
+            templateUrl : 'html/business/basic/role.html',
+            controller : role
         });
 
         $routeProvider.otherwise({

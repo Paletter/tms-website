@@ -1,11 +1,11 @@
 define(function() {
     return ['$scope', "BaseHttp", "AppConfig", "Dialog","$rootScope","AjaxFileUpload","PrintService", function($scope, BaseHttp, AppConfig, Dialog, $rootScope, AjaxFileUpload, PrintService) {
 
-        //国内快递单号批量导入
-        $scope.importExpressExcel = function(element) {
+        //包裹出库模板导入
+        $scope.importDeliverPiecesExcel = function(element) {
             Dialog.updateLoad();
             AjaxFileUpload.upload({
-                url: "/ExpressController/importExpressExcel",
+                url: "/OutTemplateController/importDeliverPiecesExcel",
                 fileElementId: element.id,
                 success: function (data){
                     Dialog.close();
@@ -21,9 +21,9 @@ define(function() {
                 }
             });
         };
-        //国内快递单号批量导入模板
-        $scope.printExpressImportTemplate = function() {
-            PrintService.fixedDownload("/ExpressController/printExpressImportTemplate");
+        //包裹出库模板
+        $scope.printDeliverPiecesImportTemplate = function() {
+            PrintService.fixedDownload("/OutTemplateController/printDeliverPiecesImportTemplate");
         };
 
         var initialize = function () {

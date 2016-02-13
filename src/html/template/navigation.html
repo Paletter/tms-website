@@ -2,7 +2,7 @@
     <div id="menu" class="sidebar-nav navbar-collapse" ng-class="{collapse:screenWidth < 768}">
         <ul class="nav" id="side-menu">
             <li ng-repeat="menu in loginUser.menuVoList">
-                <a href="" class="font-weight-bold"><i class="fa fa-angle-right fa-fw"></i>{{menu.category}}</a>
+                <a href="" class="font-weight-bold"><i class="fa fa-angle-down fa-fw"></i>{{menu.category}}</a>
                 <ul class="nav nav-second-level">
                     <li ng-repeat="sub in menu.menuSubList" ng-click="hideMenu();">
                         <a href="{{sub.resourceUrl}}" style="padding-top:3px;padding-bottom:3px;" >{{sub.resourceName}}</a>

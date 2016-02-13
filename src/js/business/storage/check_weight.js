@@ -108,8 +108,8 @@ define(function() {
             $scope.queryParam = {};
             $scope.kernelVolumeWeight = {};
 
-            if(!StringUtils.isBlank($routeParams.consignmentNo)) {
-                $scope.queryParam.queryNo = $routeParams.consignmentNo;
+            if(!StringUtils.isBlank($routeParams.piecesNo)) {
+                $scope.queryParam.queryNo = $routeParams.piecesNo;
             }
             $("#queryNo").focus();
         };

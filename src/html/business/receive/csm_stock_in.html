@@ -1,0 +1,300 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">运单包裹入库</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body form-inline">
+                <div class="form-group">
+                    <label class="col-sm-4">标准入库模板导入</label>
+                    <div class="col-sm-6">
+                        <input type="file" id="stockCsmFile" name="stockCsmFile"
+                               onchange="angular.element(this).scope().importStockCsmExcel(this)" multiple>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="" ng-click="printStockCsmImportTemplate()">模板</a>
+                    </div>
+                </div>
+            </div>
+            <!-- panel-body end -->
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">关联号</span>
+                            <input type="text" class="form-control" id="logisticsNo"
+                                   ng-model="piecesResultVo.logisticsNo"
+                                   ng-change="logisticsNoChange();"
+                                   ng-keydown="keyPressQueryEvent($event);" />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">实重</span>
+                            <input type="text" class="form-control text-control" id="acturalWeight"
+                                   ng-model="piecesResultVo.actualWeight"
+                                   ng-readonly="isNotSearchPieces"
+                                   ng-keydown="keyPressEventOfActualWeight($event);"/>
+                            <span class="input-group-addon">{{UnitsConfig.weightUnit}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">体积重</span>
+                            <input type="text" class="form-control" readonly
+                                   ng-model="piecesResultVo.volumeWeight" />
+                            <span class="input-group-addon">{{UnitsConfig.weightUnit}}</span>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default"
+                                        ng-disabled="isNotSearchPieces"
+                                        ng-click="showVolumeWeightModal()"><i class="fa fa-keyboard-o"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" ng-show="!isNotSearchPieces">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-primary" ng-click="clickBtnStockIn()"><i class="glyphicon glyphicon-floppy-save"></i><i class="glyphicon glyphicon-print"></i>入库</button>
+                        <button type="button" class="btn btn-primary" ng-click="printPiecesStorageLabel()"><i class="glyphicon glyphicon-print"></i>打印标签</button>
+                    </div>
+                </div>
+            </div>
+            <!-- panel-body end -->
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-show="piecesResultVo.tmPiecesId">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-4">包裹号：{{piecesResultVo.piecesNo}}</div>
+                    <div class="col-sm-4">运单号：{{piecesResultVo.consignmentNo}}</div>
+                </div>
+            </div>
+            <!-- panel-body end -->
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-show="!isNotSearchPieces">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+
+                <!-- Shipper -->
+                <div class="row">
+                    <div class="col-sm-12 font-weight-bold">发货人信息</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">发货人</span>
+                            <input type="text" class="form-control" id="shipperName"
+                                   ng-model="csmResultVo.shipperName"/>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">发货人电话</span>
+                            <input type="text" class="form-control text-control"
+                                   ng-model="csmResultVo.shipperMobileNo"/>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">发货人公司</span>
+                            <input type="text" class="form-control text-control"
+                                   ng-model="csmResultVo.shipperCompanyName"/>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">发货人地址</span>
+                            <input type="text" class="form-control text-control"
+                                   ng-model="csmResultVo.shipperEnglishFullAddress"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- Shipper end -->
+
+                <!-- Consignee -->
+                <div class="row">
+                    <div class="col-sm-12 font-weight-bold">收货人信息</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">收货人</span>
+                            <input type="text" class="form-control"
+                                   ng-model="csmResultVo.consigneeName"/>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">收货人电话</span>
+                            <input type="text" class="form-control text-control"
+                                   ng-model="csmResultVo.consigneeMobileNo"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">市名</span>
+                            <input type="text" class="form-control text-control"
+                                   ng-model="csmResultVo.consigneeStateName"/>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">收货人地址</span>
+                            <input type="text" class="form-control text-control"
+                                   ng-model="csmResultVo.consigneeChineseFullAddress"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- Consignee end -->
+
+                <!-- Goods -->
+                <div class="row">
+                    <div class="col-sm-12 font-weight-bold">货物信息</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">货物名称</span>
+                            <input type="text" class="form-control"
+                                   ng-model="csmResultVo.totalGoodsDescription"/>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">价值</span>
+                            <input type="text" class="form-control text-control"
+                                   ng-model="csmResultVo.totalGoodsValue"/>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">币种</span>
+                            <input type="text" class="form-control text-control" ng-init="piecesResultVo.totalGoodsValueCurrency = '人民币'"
+                                   ng-model="csmResultVo.totalGoodsValueCurrency"/>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-1">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">数量</span>
+                            <input type="text" class="form-control text-control"
+                                   ng-model="csmResultVo.totalQty"/>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">品牌</span>
+                            <input type="text" class="form-control text-control"
+                                   ng-model="csmResultVo.totalGoodsBrand"/>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">规格</span>
+                            <input type="text" class="form-control text-control"
+                                   ng-model="csmResultVo.totalGoodsSpec"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">单位</span>
+                            <input type="text" class="form-control text-control"
+                                   ng-model="csmResultVo.totalGoodsUnit"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- Shipper end -->
+            </div>
+            <!-- panel-body end -->
+        </div>
+    </div>
+</div>
+
+<!-- Volume weight Modal -->
+<div class="modal fade" id="volumeWeightModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="cancelVolumeWeightModal()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">计算体积重</h4>
+            </div>
+            <!-- modal-body -->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">长</span>
+                            <input type="text" class="form-control" placeholder="LENGTH" maxlength="5" ng-model="piecesResultVo.length" id="length"/>
+                            <span class="input-group-addon">{{UnitsConfig.volumeUnit}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">宽</span>
+                            <input ng-model="piecesResultVo.width" placeholder="WIDTH" maxlength="5" type="text" class="form-control" />
+                            <span class="input-group-addon">{{UnitsConfig.volumeUnit}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">高</span>
+                            <input ng-model="piecesResultVo.height" placeholder="HEIGHT" maxlength="5" type="text" class="form-control" />
+                            <span class="input-group-addon">{{UnitsConfig.volumeUnit}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal-body end -->
+
+            <!-- modal-footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="calculateVolumeWeight()"><i class="glyphicon glyphicon-ok" />计算体积重</button>
+                <button type="button" class="btn btn-default" ng-click="cancelVolumeWeightModal()"><i class="glyphicon glyphicon-remove" />取消</button>
+            </div>
+            <!-- modal-footer end -->
+        </div>
+    </div>
+</div>

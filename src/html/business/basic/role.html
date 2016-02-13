@@ -1,0 +1,107 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">角色管理</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="addRole()"><i class="glyphicon glyphicon-plus"/>创建角色</button>
+                    </div>
+                </div>
+            </div>
+            <!-- panel-body end -->
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- panel-body -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>角色名</th>
+                            <th>描述</th>
+                            <th>类型</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="row in roleList" class="thead-tbl-address">
+                            <td>
+                                <div class="col-sm-12">
+                                    <input type="text" class="edit-td" ng-model="row.roleName"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-12">
+                                    <input type="text" class="edit-td" ng-model="row.descpt"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-12">
+                                    <input type="text" class="edit-td" ng-model="row.category"/>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="" ng-show="!row.cdRoleId" ng-click="saveNewRole($index)">保存</a>
+                                <a href="" ng-show="row.cdRoleId" ng-click="updateRole($index)">保存</a>
+                                <a href="" ng-click="roleAuthRes($index)">资源</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- panel-body end -->
+        </div>
+    </div>
+</div>
+
+<!-- Auth role resource Modal -->
+<div class="modal fade" id="authRoleResModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="cancelAuthRoleResModal();"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">资源权限</h4>
+            </div>
+            <!-- modal-body -->
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <div class="col-sm-12 font-weight-bold">已有权限(点击移除)</div>
+                        <div class="col-sm-12" ng-repeat="row in currentRoleAuthResList | orderBy: 'menuOrder'">
+                            <a href="" ng-click="removeRoleAuthRes(row)">{{row.category}}&nbsp;|&nbsp;{{row.resourceName}}</a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="col-sm-12 font-weight-bold">其他权限(点击添加)</div>
+                        <div class="col-sm-12" ng-repeat="row in currentRoleVoidResList | orderBy: 'menuOrder'">
+                            <a href="" ng-click="addRoleAuthRes(row)">{{row.category}}&nbsp;|&nbsp;{{row.resourceName}}</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- modal-body end -->
+
+            <!-- modal-footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="cancelAuthRoleResModal();"><i class="glyphicon glyphicon-remove" />取消</button>
+            </div>
+            <!-- modal-footer end -->
+        </div>
+    </div>
+</div>

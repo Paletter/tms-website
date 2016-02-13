@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">国内快递单号更新</h1>
+        <h1 class="page-header">模板出库</h1>
     </div>
 </div>
 
@@ -10,13 +10,13 @@
             <!-- panel-body -->
             <div class="panel-body form-inline">
                 <div class="form-group">
-                    <label class="col-sm-4">快递单号模板导入</label>
+                    <label class="col-sm-4">包裹出库模板导入</label>
                     <div class="col-sm-6">
-                        <input type="file" id="expressFile" name="expressFile"
-                               onchange="angular.element(this).scope().importExpressExcel(this)" multiple>
+                        <input type="file" id="deliverPiecesFile" name="deliverPiecesFile"
+                               onchange="angular.element(this).scope().importDeliverPiecesExcel(this)" multiple>
                     </div>
                     <div class="col-sm-2">
-                        <a href="" ng-click="printExpressImportTemplate()">模板</a>
+                        <a href="" ng-click="printDeliverPiecesImportTemplate()">模板</a>
                     </div>
                 </div>
             </div>

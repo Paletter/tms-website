@@ -1,6 +1,6 @@
 define(function() {
-    return ['$scope', "BaseHttp", "AppConfig", "Dialog", "$rootScope", "$routeParams", "PrintService", "$timeout", "$location",
-    function($scope, BaseHttp, AppConfig, Dialog, $rootScope, $routeParams, PrintService, $timeout, $location) {
+    return ['$scope', "BaseHttp", "AppConfig", "Dialog", "$rootScope", "$routeParams", "PrintService", "$timeout", "$location", "AjaxFileUpload",
+    function($scope, BaseHttp, AppConfig, Dialog, $rootScope, $routeParams, PrintService, $timeout, $location, AjaxFileUpload) {
         //物流号改变事件
         $scope.logisticsNoChange = function() {
             var logisticsNo = $scope.piecesResultVo.logisticsNo.toUpperCase();
@@ -27,12 +27,7 @@ define(function() {
         $scope.keyPressEventOfActualWeight = function(event) {
             if(event.keyCode == "13") {
                 JQueryUtils.blur("acturalWeight");
-
-//                if($scope.piecesResultVo.tmConsignmentId && $scope.piecesResultVo.tmConsignmentId > 0) {
-                    $scope.stockInAndPrintSmallLabel();
-//                } else {
-//                    $timeout(function(){JQueryUtils.focus("memberCode")}, 300);
-//                }
+                JQueryUtils.focusSelect("shipperName");
             }
         };
         $scope.keyPressStockInEvent = function(event) {
@@ -65,16 +60,16 @@ define(function() {
                 var strIndex = inputLogisticsNo.indexOf("(");
                 if(strIndex > 0) inputLogisticsNo = inputLogisticsNo.substr(0, strIndex);
 
-                var param = {logisticsNo:inputLogisticsNo};
-                BaseHttp.post("/PiecesStockInController/queryStockedPiecesInfo", param).success(function(data) {
+                var params = {referenceNo:inputLogisticsNo};
+                BaseHttp.post("/CsmStockInController/queryStockedCsmPiecesInfo", params).success(function(data) {
                     $scope.isNotSearchPieces = false;
                     if(data.result) {
 
                         var resultPieces = data.result;
 
-                        //正常包裹入库
                         if(resultPieces.tmPiecesId) {
                             $scope.piecesResultVo = resultPieces;
+                            $scope.csmResultVo = resultPieces.stockedCsmResultVo;
                             JQueryUtils.focus("acturalWeight");
                         } else {
                             $scope.piecesResultVo = {};
@@ -99,17 +94,11 @@ define(function() {
 
             $scope.piecesResultVo.logisticsNo = $scope.piecesResultVo.logisticsNo.toUpperCase();
 
-            var stockInUrl = "";
-            if($scope.piecesResultVo.tmConsignmentId && $scope.piecesResultVo.tmConsignmentId > 0) {
-                stockInUrl = "/PiecesStockInController/consignedPiecesStockIn";
-            } else {
-                stockInUrl = "/PiecesStockInController/unconsignedPiecesStockIn";
-            }
-
             Dialog.updateLoad();
             var param = {};
+            angular.copy($scope.csmResultVo, param);
             param.tmPiecesId = $scope.piecesResultVo.tmPiecesId;
-            param.logisticsNo = $scope.piecesResultVo.logisticsNo;
+            param.referenceNo = $scope.piecesResultVo.logisticsNo;
             param.memberCode = $scope.piecesResultVo.memberCode;
             param.length = $scope.piecesResultVo.length;
             param.width = $scope.piecesResultVo.width;
@@ -117,13 +106,13 @@ define(function() {
             param.actualWeight = $scope.piecesResultVo.actualWeight;
             param.volumeWeight = $scope.piecesResultVo.volumeWeight;
             param.memo = $scope.piecesResultVo.memo;
-            BaseHttp.post(stockInUrl, param).success(function(data){
+            BaseHttp.post("/CsmStockInController/csmStockIn", param).success(function(data){
                 if(data.result) {
                     var normalStockInResultVo = data.result;
                     $scope.piecesResultVo.tmPiecesId = normalStockInResultVo.tmPiecesId;
 
-                    var param = {logisticsNo:normalStockInResultVo.logisticsNo};
-                    BaseHttp.post("/PiecesStockInController/queryStockedPiecesInfo",param).success(function(data2) {
+                    var param = {referenceNo:normalStockInResultVo.referenceNo};
+                    BaseHttp.post("/CsmStockInController/queryStockedCsmPiecesInfo",param).success(function(data2) {
                         if(data2.result) {
                             var resultPieces = data2.result;
                             $scope.piecesResultVo = resultPieces;
@@ -177,6 +166,30 @@ define(function() {
         //打印入库标签
         $scope.printPiecesStorageLabel = function() {
             PrintService.print("/PiecesStockInController/printPiecesStorageLabel?tmPiecesId=" + $scope.piecesResultVo.tmPiecesId);
+        };
+        //运单批量导入
+        $scope.importStockCsmExcel = function(element) {
+            Dialog.updateLoad();
+            AjaxFileUpload.upload({
+                url: "/CsmStockInController/importStockCsmExcel",
+                fileElementId: element.id,
+                success: function (data){
+                    Dialog.close();
+                    if(data.result) {
+                        Dialog.remind("操作成功")
+                    } else {
+                        if(data.msg) {
+                            Dialog.alert(data.msg);
+                        } else {
+                            Dialog.alert("操作失败");
+                        }
+                    }
+                }
+            });
+        };
+        //运单批量导入模板
+        $scope.printStockCsmImportTemplate = function() {
+            PrintService.fixedDownload("/CsmStockInController/printStockCsmImportTemplate");
         };
 
         //小窗口

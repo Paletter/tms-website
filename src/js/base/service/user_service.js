@@ -26,7 +26,7 @@ define(function () {
                     }
                 }).error(function(data){
                     deferred.reject(false);
-                    $location.patch("/maintain.html");
+                    $location.path("/maintain.html");
                 });
             }else{
                 deferred.resolve(true);
