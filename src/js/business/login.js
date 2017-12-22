@@ -24,7 +24,8 @@ define(function() {
         $scope.getLoginUserCountryAuth = function() {
             var param = {
                 userName: $scope.userName,
-                pwd: $scope.password
+                pwd: $scope.password,
+                companyCode: $scope.companyCode
             };
             BaseHttp.post("/LoginController/getLoginUserCountryAuth", param).success(function(data){
                 if(data.result) {
@@ -38,6 +39,7 @@ define(function() {
             var param = {
                 userName: $scope.userName,
                 pwd: $scope.password,
+                companyCode: $scope.companyCode,
                 countryCode: $scope.countryCode,
                 warehouseCode: $scope.warehouseCode
             };
@@ -57,6 +59,7 @@ define(function() {
         };
         var initialize = function () {
             $scope.loginStatus = "initial";
+            $scope.companyCode = "GODADDY";
             JQueryUtils.focus("userName");
         };
         initialize();
